@@ -13,7 +13,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Work History</title>
+    <title>Historique des prestations</title>
     <!-- Pignose Calender -->
     <link href="../plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
     <!-- Chartist -->
@@ -93,8 +93,8 @@
                                 <div class="drop-down dropdown-profile animated fadeIn dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(5px, 57px, 0px);">
                                     <div class="dropdown-content-body">
                                         <ul>
-                                            <li><span>Logged in as <?php echo $_SESSION["user"]; ?> </span></li>
-                                            <li><a href="../logout.php"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                            <li><span>Connecté en tant que <?php echo $_SESSION["user"]; ?> </span></li>
+                                            <li><a href="../logout.php"><i class="icon-key"></i> <span>Se déconnecter</span></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -115,11 +115,11 @@
             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
                 <div class="nk-nav-scroll active" style="overflow: hidden; width: auto; height: 100%;">
                     <ul class="metismenu in" id="menu">
-                        <li class="nav-label">Dashboard</li>
+                        <li class="nav-label">Tableau de bord</li>
 
                         <li class="">
                             <a class="has-arrow" href="../empDashboard.php" aria-expanded="false">
-                                <i class="fa fa-dashboard"></i><span class="nav-text">Employee Dashboard</span>
+                                <i class="fa fa-dashboard"></i><span class="nav-text">Tableau de bord des employés</span>
                             </a>
 
                         </li>
@@ -127,7 +127,7 @@
 
                         <li class="">
                             <a class="has-arrow" href="../empDash/workHistory.php" aria-expanded="false">
-                                <i class="fa fa-history"></i><span class="nav-text">Work History</span>
+                                <i class="fa fa-history"></i><span class="nav-text">Historique des prestations</span>
                             </a>
 
                         </li>
@@ -153,7 +153,7 @@
                 <div class="row">
                     <div class="col-lg-12">
 
-                        <h2>Work History</h2>
+                        <h2>Historique des prestations</h2>
 
                         <div class="card">
                             <div class="card-body">
@@ -165,11 +165,11 @@
                                             <thead>
                                                 <tr>
                                                 <th>S.NO.</th>
-                                                    <th>JOB NAME</th>
-                                                    <th>ASSIGNED TO CLIENT</th>
-                                                    <th>START DATE AND TIME</th>
-                                                    <th>END DATE AND TIME</th>
-                                                    <th>STATUS OF THE WORK</th>
+                                                    <th>NOM DE LA PRESTATION</th>
+                                                    <th>ATTRIBUÉ AU CLIENT</th>
+                                                    <th>DATE ET HEURE DE DÉBUT</th>
+                                                    <th>DATE ET HEURE DE FIN</th>
+                                                    <th>STATUS DES PRESTATIONS</th>
 
                                                 </tr>
                                             </thead>

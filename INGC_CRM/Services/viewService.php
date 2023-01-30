@@ -11,7 +11,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Viewing all the services</h1>
-    <button><a href="./addService.php">Click me</a></button>
+    <h1>Visualiser tous les services</h1>
+    <button><a href="./addService.php">Cliquez</a></button>
 </body>
 </html>

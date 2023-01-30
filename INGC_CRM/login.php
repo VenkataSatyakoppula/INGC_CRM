@@ -9,7 +9,7 @@
 <link href="css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="index.css?v=<?php echo time(); ?>">
 
-    <title>Login Form</title>
+    <title>Formulaire de connexion</title>
 </head>
 <body>
 
@@ -19,7 +19,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <!-- <div class="d-flex justify-content-between"> -->
-                                <h4 class="card-title">LOGIN</h4>
+                                <h4 class="card-title">CONNEXION</h4>
                                 <!-- <div class="d-flex justify-content-end ">
                                 
                                     <p>Please Select the Type of User</p>

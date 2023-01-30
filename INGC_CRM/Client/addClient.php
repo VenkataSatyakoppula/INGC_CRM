@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Client</title>
+    <title>Ajouter Client</title>
     <!-- Pignose Calender -->
     <link href="../plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
     <!-- Chartist -->
@@ -95,7 +95,7 @@
                                 <div class="drop-down dropdown-profile animated fadeIn dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(5px, 57px, 0px);">
                                     <div class="dropdown-content-body">
                                         <ul>
-                                            <li><span>Logged in as <?php echo $_SESSION["user"]; ?> </span></li>
+                                            <li><span>Se connecter en tant que <?php echo $_SESSION["user"]; ?> </span></li>
                                             <li><a href="../logout.php"><i class="icon-key"></i> <span>Logout</span></a></li>
                                         </ul>
                                     </div>
@@ -119,26 +119,26 @@
             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
                 <div class="nk-nav-scroll active" style="overflow: hidden; width: auto; height: 100%;">
                     <ul class="metismenu in" id="menu">
-                        <li class="nav-label">Dashboard</li>
+                        <li class="nav-label">Tableau de bord</li>
                         <li class="">
                             <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+                                <i class="icon-speedometer menu-icon"></i><span class="nav-text">Tableau de bord</span>
                             </a>
                             <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                                <li class="active"><a href="../<?php echo $redir; ?>" class="active">Home 1</a></li>
+                                <li class="active"><a href="../<?php echo $redir; ?>" class="active">Acceuil 1</a></li>
                             </ul>
                         </li>
 
                         <li class="">
                             <a class="has-arrow" href="../Jobs/viewJob.php" aria-expanded="false">
-                                <i class="fa fa-tasks"></i><span class="nav-text">Jobs</span>
+                                <i class="fa fa-tasks"></i><span class="nav-text">Prestations</span>
                             </a>
 
                         </li>
 
                         <li class="">
                             <a class="has-arrow" href="../Jobs/jobhistory.php" aria-expanded="false">
-                                <i class="fa fa-history"></i><span class="nav-text">Jobs History</span>
+                                <i class="fa fa-history"></i><span class="nav-text">Historique des prestations</span>
                             </a>
                         </li>
 
@@ -151,7 +151,7 @@
 
                         <li class="">
                             <a class="has-arrow" href="../Employee/viewEmp.php" aria-expanded="false">
-                                <i class="fa fa-users"></i><span class="nav-text">Employee</span>
+                                <i class="fa fa-users"></i><span class="nav-text">Employé</span>
                             </a>
 
                         </li>
@@ -183,24 +183,24 @@
                 <div class="w-75 col-lg-12 mx-auto mt-5">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Add Client</h4>
+                            <h4 class="card-title">Ajouter Client</h4>
                             <div class="basic-form" >
                                 <form id="addclientdata" method="post">
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">First Name</label>
+                                        <label class="col-sm-2 col-form-label">Prénom</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" placeholder="First Name" name="nomClient" id="nomClient">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Last Name</label>
+                                        <label class="col-sm-2 col-form-label">Nom de famille</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" placeholder="Last Name" name="prenomClient" id="prenomClient">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Phone no</label>
+                                        <label class="col-sm-2 col-form-label">Numéro de téléphone</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" placeholder="Enter Client Phone" name="telClient" id="telClient">
                                         </div>
@@ -215,7 +215,7 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Address</label>
+                                        <label class="col-sm-2 col-form-label">Adresse</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" placeholder="Address" name="complementAdresseClient"  id="complementAdresseClient">
                                         </div>
@@ -229,14 +229,14 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Password</label>
+                                        <label class="col-sm-2 col-form-label">Mot de passe</label>
                                         <div class="col-sm-10">
                                             <input type="password" class="form-control" placeholder="Password" name="mdpEmploye" id="mdpEmploye">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Client Postal Code</label>
+                                        <label class="col-sm-2 col-form-label">Code Postal Client</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" placeholder="Client Postal Code" name="cpClient" id="cpClient">
                                         </div>
@@ -245,9 +245,9 @@
 
                                     <div class=" d-flex justify-content-between">
 
-                                        <button type="submit" class="btn btn-dark" id="add-data">ADD </button>
+                                        <button type="submit" class="btn btn-dark" id="add-data">AJOUTER </button>
 
-                                        <a href="./viewClient.php"><button type="button" class="btn btn-info">VIEW CLIENTS</button></a>
+                                        <a href="./viewClient.php"><button type="button" class="btn btn-info">VOIR CLIENTS</button></a>
 
                                     </div>
 

@@ -182,8 +182,8 @@
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(5px, 57px, 0px);">
                                 <div class="dropdown-content-body">
                                     <ul>
-                                        <li><span>Logged in as <?php echo $_SESSION["user"]; ?> </span></li>
-                                        <li><a href="logout.php"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                        <li><span>Connecté en tant que <?php echo $_SESSION["user"]; ?> </span></li>
+                                        <li><a href="logout.php"><i class="icon-key"></i> <span>Se déconnecter</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -203,12 +203,12 @@
             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
                 <div class="nk-nav-scroll active" style="overflow: hidden; width: auto; height: 100%;">
                     <ul class="metismenu in" id="menu">
-                        <li class="nav-label">Dashboard</li>
+                        <li class="nav-label">Tableau de bord</li>
 
 
                         <li class="">
                             <a class="has-arrow" href="./empDash/workHistory.php" aria-expanded="false">
-                                <i class="fa fa-history"></i><span class="nav-text">Work History</span>
+                                <i class="fa fa-history"></i><span class="nav-text">Historique des prestations</span>
                             </a>
 
                         </li>

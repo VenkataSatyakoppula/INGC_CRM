@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Manager</title>
+    <title>Ajouter Manager</title>
     <!-- Pignose Calender -->
     <link href="../plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
     <!-- Chartist -->
@@ -95,8 +95,8 @@
                                 <div class="drop-down dropdown-profile animated fadeIn dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(5px, 57px, 0px);">
                                     <div class="dropdown-content-body">
                                         <ul>
-                                            <li><span>Logged in as <?php echo $_SESSION["user"]; ?> </span></li>
-                                            <li><a href="../logout.php"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                            <li><span>connecté en tant que <?php echo $_SESSION["user"]; ?> </span></li>
+                                            <li><a href="../logout.php"><i class="icon-key"></i> <span>Se déconnecter</span></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -119,38 +119,38 @@
             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
                 <div class="nk-nav-scroll active" style="overflow: hidden; width: auto; height: 100%;">
                     <ul class="metismenu in" id="menu">
-                        <li class="nav-label">Dashboard</li>
+                        <li class="nav-label">Tableau de bord</li>
                         <li class="">
                             <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+                                <i class="icon-speedometer menu-icon"></i><span class="nav-text">Tableau de bord</span>
                             </a>
                             <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                                <li class="active"><a href="../<?php echo $redir; ?>" class="active">Home 1</a></li>
+                                <li class="active"><a href="../<?php echo $redir; ?>" class="active">Acceuil 1</a></li>
                             </ul>
                         </li>
 
                         <li class="">
                             <a class="has-arrow" href="../Jobs/viewJob.php" aria-expanded="false">
-                                <i class="fa fa-tasks"></i><span class="nav-text">Jobs</span>
+                                <i class="fa fa-tasks"></i><span class="nav-text">Prestations</span>
                             </a>
 
                         </li>
                         <li class="">
                             <a class="has-arrow" href="../Jobs/jobhistory.php" aria-expanded="false">
-                                <i class="fa fa-history"></i><span class="nav-text">Jobs History</span>
+                                <i class="fa fa-history"></i><span class="nav-text">Historique des prestations</span>
                             </a>
                         </li>
 
                         <li class="">
                             <a class="has-arrow" href="../Client/viewClient.php" aria-expanded="false">
-                                <i class="fa fa-user"></i><span class="nav-text">Client</span>
+                                <i class="fa fa-user"></i><span class="nav-text">Clients</span>
                             </a>
 
                         </li>
 
                         <li class="">
                             <a class="has-arrow" href="../Employee/viewEmp.php" aria-expanded="false">
-                                <i class="fa fa-users"></i><span class="nav-text">Employee</span>
+                                <i class="fa fa-users"></i><span class="nav-text">Employés</span>
                             </a>
 
                         </li>
@@ -182,7 +182,7 @@
                 <div class="w-75 col-lg-12 mx-auto mt-5">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Add Manager</h4>
+                            <h4 class="card-title">Ajouter Manager</h4>
                             <span id="errorinfo"></span>
                             <div class="basic-form" >
                                 <form id="addclientdata" method="post">
@@ -201,18 +201,18 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Password</label>
+                                        <label class="col-sm-2 col-form-label">Mot de passe</label>
                                         <div class="col-sm-10">
                                             <input type="password" class="form-control" placeholder="password" name="password">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Select a Role</label>
+                                    <label class="col-sm-2 col-form-label">Sélectionnez un rôle</label>
                                     <div class="col-sm-10">
                                     <select name="role" id="role" class="form-control">
                                         <option value="1">Manager</option>
-                                        <option value="4">SuperUser</option>
+                                        <option value="4">Administrateur</option>
                                     </select>
                                     </div>
                                     </div>
@@ -222,7 +222,7 @@
 
                                         <button type="submit" class="btn btn-dark" id="add-data">ADD </button>
 
-                                        <a href="./viewManagers.php"><button type="button" class="btn btn-info">VIEW MANAGERS</button></a>
+                                        <a href="./viewManagers.php"><button type="button" class="btn btn-info">VOIR MANAGERS</button></a>
 
                                     </div>
 

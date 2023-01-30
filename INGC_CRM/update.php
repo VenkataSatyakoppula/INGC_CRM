@@ -207,8 +207,8 @@
 
 
 
-                                        <li><span>Logged in as <?php echo $_SESSION["user"]; ?> </span></li>
-                                        <li><a href="logout.php"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                        <li><span>Se connecter en tant que <?php echo $_SESSION["user"]; ?> </span></li>
+                                        <li><a href="logout.php"><i class="icon-key"></i> <span>Se déconnecter</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -228,13 +228,13 @@
             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
                 <div class="nk-nav-scroll active" style="overflow: hidden; width: auto; height: 100%;">
                     <ul class="metismenu in" id="menu">
-                        <li class="nav-label">Dashboard</li>
+                        <li class="nav-label">Tableau de bord</li>
                         <li class="">
                             <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+                                <i class="icon-speedometer menu-icon"></i><span class="nav-text">Tableau de bord</span>
                             </a>
                             <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                                <li class="active"><a href="./index.php" class="active">Home 1</a></li>
+                                <li class="active"><a href="./index.php" class="active">Acceuil 1</a></li>
                                 <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                             </ul>
                         </li>
@@ -270,25 +270,25 @@
                 <div class="w-75 col-lg-12 mx-auto mt-5">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Update Service</h4>
+                            <h4 class="card-title">Modification des prestations</h4>
                             <div class="basic-form">
                                 <form action="update-logic.php?empid=<?php echo $_GET['empid'] ?>&id=<?php echo $_GET['id'] ?>" method="post">
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Service Name</label>
+                                        <label class="col-sm-2 col-form-label">Nom de la prestation</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" placeholder="Service Name" value="<?php echo $_GET['servicename']; ?>" name="servicename">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Start Time :</label>
+                                        <label class="col-sm-2 col-form-label">Heure de début :</label>
                                         <div class="col-sm-10">
                                             <input type="datetime-local" class="form-control" value="<?php echo $_GET['starttime'] ?>" name="starttime">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">End Time :</label>
+                                        <label class="col-sm-2 col-form-label">Heure de fin :</label>
                                         <div class="col-sm-10">
                                             <input type="datetime-local" class="form-control" value="<?php echo $_GET['endtime'] ?>" name="endtime">
                                         </div>
@@ -301,7 +301,7 @@
 
 
                                     <div class="col-sm-10">
-                                        <button type="submit" class="btn btn-dark">UPDATE</button>
+                                        <button type="submit" class="btn btn-dark">MODIFIER</button>
                                     </div>
                                 </form>
                             </div>

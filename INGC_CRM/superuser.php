@@ -15,7 +15,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Super User Dashboard</title>
+    <title>Tableau de bord Administrateur</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Pignose Calender -->
@@ -252,8 +252,8 @@
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(5px, 57px, 0px);">
                                 <div class="dropdown-content-body">
                                     <ul>
-                                        <li><span>Logged in as <?php echo $_SESSION["user"]; ?> </span></li>
-                                        <li><a href="logout.php"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                        <li><span>Connecter en tant que <?php echo $_SESSION["user"]; ?> </span></li>
+                                        <li><a href="logout.php"><i class="icon-key"></i> <span>Se déconnecter</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -273,13 +273,13 @@
             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
                 <div class="nk-nav-scroll active" style="overflow: hidden; width: auto; height: 100%;">
                     <ul class="metismenu in" id="menu">
-                        <li class="nav-label">Dashboard</li>
+                        <li class="nav-label">Tableau de bord</li>
                         <li class="">
                             <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+                                <i class="icon-speedometer menu-icon"></i><span class="nav-text">Tableau de bord</span>
                             </a>
                             <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                                <li class="active"><a href="<?php echo $redir; ?>" class="active">Home 1</a></li>
+                                <li class="active"><a href="<?php echo $redir; ?>" class="active">Acceuil 1</a></li>
                                 <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                             </ul>
                         </li>
@@ -287,7 +287,7 @@
 
                         <li class="">
                             <a class="has-arrow" href="./Jobs/viewJob.php" aria-expanded="false">
-                                <i class="fa fa-tasks"></i><span class="nav-text">Jobs</span>
+                                <i class="fa fa-tasks"></i><span class="nav-text">Prestations</span>
                             </a>
                             <!-- <ul aria-expanded="false" class="collapse" style="height: 0px;"> -->
                                 <!-- <li class="active"><a href="./Service/addService.php" class="active">Add Jobs </a></li> -->
@@ -298,13 +298,13 @@
 
                         <li class="">
                             <a class="has-arrow" href="./Jobs/jobhistory.php" aria-expanded="false">
-                                <i class="fa fa-history"></i><span class="nav-text">Job History</span>
+                                <i class="fa fa-history"></i><span class="nav-text">Historique des prestations</span>
                             </a>
                         </li>
 
                         <li class="">
                             <a class="has-arrow" href="./Client/viewClient.php" aria-expanded="false">
-                                <i class="fa fa-user"></i><span class="nav-text">Client</span>
+                                <i class="fa fa-user"></i><span class="nav-text">Clients</span>
                             </a>
                             <!-- <ul aria-expanded="false" class="collapse" style="height: 0px;"> -->
                                 <!-- <li class="active"><a href="./Client/addClient.php" class="active">Add Client </a></li> -->
@@ -314,7 +314,7 @@
 
                         <li class="">
                             <a class="has-arrow" href="./Employee/viewEmp.php" aria-expanded="false">
-                                <i class="fa fa-users"></i><span class="nav-text">Employee</span>
+                                <i class="fa fa-users"></i><span class="nav-text">Employés</span>
                             </a>
                             <!-- <ul aria-expanded="false" class="collapse" style="height: 0px;"> -->
                                 <!-- <li class="active"><a href="./Employee/addEmp.php" class="active">Add Employee </a></li>       -->

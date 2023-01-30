@@ -13,7 +13,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Client Dashboard</title>
+    <title>Tableau de bord Client</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Pignose Calender -->
@@ -182,8 +182,8 @@
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(5px, 57px, 0px);">
                                 <div class="dropdown-content-body">
                                     <ul>
-                                        <li><span>Logged in as <?php echo $_SESSION["user"]; ?> </span></li>
-                                        <li><a href="logout.php"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                        <li><span>Connecté en tant que <?php echo $_SESSION["user"]; ?> </span></li>
+                                        <li><a href="logout.php"><i class="icon-key"></i> <span>Se déconnecter</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -203,7 +203,7 @@
             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
                 <div class="nk-nav-scroll active" style="overflow: hidden; width: auto; height: 100%;">
                     <ul class="metismenu in" id="menu">
-                        <li class="nav-label">Dashboard</li>
+                        <li class="nav-label">Tableau de bord</li>
 
 
 
@@ -216,7 +216,7 @@
 
                         <li class="">
                             <a class="has-arrow" href="./clientDash/workHistory.php" aria-expanded="false">
-                                <i class="fa fa-history"></i><span class="nav-text">Work History</span>
+                                <i class="fa fa-history"></i><span class="nav-text">Historique des prestations</span>
                             </a>
 
                         </li>
@@ -300,7 +300,7 @@
                 <div class="row">
                     <div class="col-lg-12">
 
-                        <h2>Jobs In Progress</h2>
+                        <h2>Prestation en cours</h2>
 
                         <div class="card">
                             <div class="card-body">
@@ -312,11 +312,11 @@
                                             <thead>
                                                 <tr>
                                                     <th>S.NO.</th>
-                                                    <th>JOB NAME</th>
-                                                    <th>EMPLOYEE NAME</th>
-                                                    <th>START TIME</th>
-                                                    <th>END TIME</th>
-                                                    <th>STATUS OF THE WORK</th>
+                                                    <th>NOM DE LA PRESTATION/th>
+                                                    <th>NOM DE L'EMPLOYE</th>
+                                                    <th>HEURE DE DEBUT</th>
+                                                    <th>HEURE DE FIN</th>
+                                                    <th>STATUS DE LA PRESTATION</th>
 
                                                 </tr>
                                             </thead>
