@@ -80,7 +80,7 @@
 
                     <li class="icons dropdown"><a href="viewnew.php" data-toggle="dropdown">
                                 </a><div class="viewservice"><a href="viewnew.php" data-toggle="dropdown">
-                    </a><a href="index.php">View Services</a>
+                    </a><a href="index.php">Afficher les services</a>
 
                 </div>
                                 
