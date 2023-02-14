@@ -467,12 +467,21 @@
                                                         <td><?php echo  $get_data[$i]->START_TIME; ?></td>
                                                         <td><?php echo  $get_data[$i]->END_TIME; ?></td>
                                                         <!-- <td class="td"><button class="updatebutton" id="udpatebutton">UPDATE</button></td> -->
+                                                        <?php if($get_data[$i]->empid == $_SESSION["id"]) {?>
                                                         <td>
                                                             <div class="viewlinkupdate"><a class="updatelink" href="update.php?empid=<?php echo $_SESSION['id'] ?>&id=<?php echo $get_data[$i]->ID ?>&servicename=<?php echo $get_data[$i]->SERVICE_NAME ?>&starttime=<?php echo $get_data[$i]->START_TIME ?>&endtime=<?php echo $get_data[$i]->END_TIME; ?>">UPDATE</a></div>
                                                         </td>
                                                         <td>
                                                             <div class="viewlinkdelete"><a href="delete.php?eid=<?php echo  $_SESSION['id'] ?>&id=<?php echo $get_data[$i]->ID; ?>">DELETE</a></div>
                                                         </td>
+                                                        <?php }else{?>
+                                                            <td>
+                                                            <strong>Update Not Allowed!</strong>
+                                                        </td>
+                                                        <td>
+                                                        <strong> Delete Not Allowed!</strong>
+                                                        </td>
+                                                            <?php }?>
                                                     </tr>
 
 

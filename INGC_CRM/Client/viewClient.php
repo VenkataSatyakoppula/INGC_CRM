@@ -258,49 +258,50 @@ include "../config.php";
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">Prénom</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" placeholder="First Name" name="prenomClient">
+                                            <input type="text" class="form-control" placeholder="First Name" name="prenomClient" required>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label"></label>
+                                        <label class="col-sm-2 col-form-label">NOM DE FAMILLE</label>
                                         <div class="col-sm-10">
-                                        <input type="text" placeholder="Last Name" class="form-control" name="nomClient">
+                                        <input type="text" placeholder="Last Name" class="form-control" name="nomClient" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">Numéro de téléphone</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" placeholder="Enter Client Phone" name="telClient" id="telClient">
+                                            <input type="text" class="form-control" placeholder="Enter Client Phone" name="telClient" id="telClient" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">Age</label>
                                         <div class="col-sm-10">
-                                        <input type="text" placeholder="Phone No" class="form-control" name="ageClient">
+                                        <input type="text" placeholder="Phone No" class="form-control" name="ageClient" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">Email</label>
                                         <div class="col-sm-10">
-                                        <input type="text" placeholder="Phone No" class="form-control" name="emailClient">
+                                        <input type="text" placeholder="Phone No" class="form-control" name="emailClient" required>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">Adresse</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" placeholder="Address" name="complementAdresseClient">
+                                            <input type="text" class="form-control" placeholder="Address" name="complementAdresseClient" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">code PIN</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" placeholder="cpEmployee" name="cpClient">
+                                            <input type="text" class="form-control" placeholder="cpEmployee" name="cpClient" required>
                                         </div>
                                     </div>
 
                                 </div>
+                                <span id="erros"></span>
                                 <div class="modal-footer">
                                     <input id="submit" type="submit" value="UPDATE" update-id="" class="btn btn-dark afterupdate" />
 
@@ -448,6 +449,7 @@ else{
                         url: baseUrl,
                                 type: 'POST',
                                 dataType: "json",
+                                async: false,
                                 data: {endpoint: "/clients/clientJobsDelete", id:id},
                                 success: function(data){
                                     console.log("success");
@@ -459,6 +461,7 @@ else{
                             endpoint: "/clients/deleteClient",
                             id:id
                         },
+                        async: false,
                         type: 'POST',
                         success: function(data) {
                             console.log(data, "i am the data after ajax call is completed");
@@ -524,7 +527,6 @@ else{
                             $('input[name="emailClient"]').val(data.emailClient)
                             $('input[name="complementAdresseClient"]').val(data.complementAdresseClient)
                             $('input[name="cpClient"]').val(data.cpClient)
-
                         },
                     });
             });
@@ -549,6 +551,9 @@ else{
                         async: true,
                         data: fd,
                         success: function(data) {
+                            if(typeof data !== 'object' && data !== null){
+                                $('#erros').html("Email already Exists, please try again").css("color","red");
+                            }else{
                             console.log(data, "i am the data after update job is completed");
                             console.log("update is done");
                             $('#myUpdateModal').modal('hide');
@@ -570,7 +575,8 @@ else{
                                 window.location.reload();
                             }, 500)
 
-                        },
+                        }
+                    },
                         error: function(xhr, exception) {
                             var msg = "";
                             if (xhr.status === 0) {

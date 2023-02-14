@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
+    <title>Add a Service</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Pignose Calender -->
@@ -46,9 +46,14 @@
         <!--**********************************
             Nav header start
         ***********************************-->
+        <?php if($_SESSION['role']==4) {
+                    $redir = "superuser.php";
+                }else{
+                    $redir = "index.php";
+                } ?>
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index.php">
+                <a href="<?php echo $redir; ?>">
                     <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
                     <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
@@ -77,71 +82,6 @@
                 </div>
                 <div class="header-right">
                     <ul class="clearfix">
-
-                    <li class="icons dropdown"><a href="viewnew.php" data-toggle="dropdown">
-                                </a><div class="viewservice"><a href="viewnew.php" data-toggle="dropdown">
-                    </a><a href="index.php">Afficher les services</a>
-
-                </div>
-                                
-                            
-                            <div class="drop-down animated fadeIn dropdown-menu">
-                                <div class="dropdown-content-heading d-flex justify-content-between">
-                                    <span class="">3 New Messages</span>  
-                                    <a href="javascript:void()" class="d-inline-block">
-                                        <span class="badge badge-pill gradient-1">3</span>
-                                    </a>
-                                </div>
-                                <div class="dropdown-content-body">
-                                    <ul>
-                                        <li class="notification-unread">
-                                            <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/1.jpg" alt="">
-                                                <div class="notification-content">
-                                                    <div class="notification-heading">Saiful Islam</div>
-                                                    <div class="notification-timestamp">08 Hours ago</div>
-                                                    <div class="notification-text">Hi Teddy, Just wanted to let you ...</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="notification-unread">
-                                            <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/2.jpg" alt="">
-                                                <div class="notification-content">
-                                                    <div class="notification-heading">Adam Smith</div>
-                                                    <div class="notification-timestamp">08 Hours ago</div>
-                                                    <div class="notification-text">Can you do me a favour?</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/3.jpg" alt="">
-                                                <div class="notification-content">
-                                                    <div class="notification-heading">Barak Obama</div>
-                                                    <div class="notification-timestamp">08 Hours ago</div>
-                                                    <div class="notification-text">Hi Teddy, Just wanted to let you ...</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/4.jpg" alt="">
-                                                <div class="notification-content">
-                                                    <div class="notification-heading">Hilari Clinton</div>
-                                                    <div class="notification-timestamp">08 Hours ago</div>
-                                                    <div class="notification-text">Hello</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    
-                                </div>
-                            </div>
-                        </li>
-                        
-                        
-                        
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative" data-toggle="dropdown" aria-expanded="false">
                                 <span class="activity active"></span>
@@ -149,11 +89,7 @@
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(5px, 57px, 0px);">
                                 <div class="dropdown-content-body">
-                                    <ul>
-                                        
-                                        
-                                        
-                                        
+                                    <ul>     
                                         <li><span>Logged in as <?php echo $_SESSION["user"]; ?> </span></li>
                                         <li><a href="logout.php"><i class="icon-key"></i> <span>Logout</span></a></li>
                                     </ul>
@@ -176,11 +112,12 @@
                 <ul class="metismenu in" id="menu">
                     <li class="nav-label">Dashboard</li>
                     <li class="">
+
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                         </a>
                         <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                            <li class="active"><a href="./index.html" class="active">Home 1</a></li>
+                            <li class="active"><a href="<?php echo $redir; ?>" class="active">Home</a></li>
                             <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                         </ul>
                     </li>
@@ -237,21 +174,21 @@
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Service Name</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" placeholder="Service Name" name="servicename">
+                                                <input type="text" class="form-control" placeholder="Service Name" name="servicename" required>
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Start Time :</label>
                                             <div class="col-sm-10">
-                                                <input type="datetime-local" class="form-control" name="starttime">
+                                                <input type="datetime-local" class="form-control" name="starttime" required>
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">End Time :</label>
                                             <div class="col-sm-10">
-                                                <input type="datetime-local" class="form-control" name="endtime">
+                                                <input type="datetime-local" class="form-control" name="endtime" required>
                                             </div>
                                         </div>
                                         

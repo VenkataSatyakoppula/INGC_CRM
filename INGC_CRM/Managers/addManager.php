@@ -108,7 +108,7 @@
         </div>
 
 
-        <!--**********************************
+        <!--**********************************Sidebar
             Header end ti-comment-alt
         ***********************************-->
 
@@ -279,7 +279,6 @@
 
                         var fd = new FormData(this);
                         var baseUrl = "../register-logic.php";
-                        console.log(fd.get("fname"));
                         $.ajax({
                                     type: "POST",
                                     url: baseUrl,
@@ -299,7 +298,8 @@
                                         $('#timeoutmsg').html("Added Manager Succesfully")
                                         setTimeout(()=>{
                                           $('#timeoutmsg').html("");
-                                        }, 2000)
+                                          location.href = "./viewManagers.php"
+                                        }, 1000)
                                         document.getElementById("addclientdata").reset();
                                         }
 

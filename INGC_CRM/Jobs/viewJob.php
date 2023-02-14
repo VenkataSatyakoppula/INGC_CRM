@@ -200,6 +200,7 @@ include "../config.php";
                                                     <th>CURRENT STATUS</th>
                                                     <th>MODIFY</th>
                                                     <th>DELETE</th>
+                                                    <th>RESET</th>
                                                    
 
 
@@ -250,6 +251,27 @@ include "../config.php";
                     <div class="modal-footer">
                         <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
                         <button type="button" class="btn btn-danger" data-id="" id="btnDelteYes">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="RestartModal" class="modal fade">
+            <div class="modal-dialog modal-confirm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="icon-box">
+                            <i class="material-icons">&#xE5CD;</i>
+                        </div>
+                        <h4 class="modal-title">Are you sure?</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Do you really want to Restart the JOB?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-warning" data-id="" id="btnRestartYes">RESTART</button>
                     </div>
                 </div>
             </div>
@@ -323,14 +345,6 @@ include "../config.php";
                                         <label class="col-sm-2 col-form-label">Client Feedback</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" placeholder="Client Feedback" name="remarque_client">
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Current Status of Job</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" placeholder="Current status" name="statut">
                                         </div>
                                     </div>
 
@@ -510,11 +524,11 @@ include "../config.php";
                                             <td>${end_date_time.toLocaleString()}</td>
                                             <td>${item.commentaire}</td>
                                             <td>${item.clientcommentaire}</td>
-                                            <td style="color:green">${item.status}</td>
+                                            <td>${action(item.status)}</td>
                                             
                                             <td id = "${item.id}"><button type="button" class="btn btn-primary btnupdate updatejobdata" update-id = "${item.id}" >UPDATE</button></td> 
                                             <td id = "${item.id}"><button type="button" class="btn btn-danger btndelete deletejobdata"  data-id = "${item.id}">DELETE</button></td> 
-                                            
+                                            <td id = "${item.id}"><button type="button" class="btn btn-warning restartjob"  data-id = "${item.id}">RESET</button></td>
 
 
                                         </tr>
@@ -532,30 +546,27 @@ include "../config.php";
                         }
 
 
-                    },
-                    error: function(xhr, exception) {
-                        var msg = "";
-                        if (xhr.status === 0) {
-                            msg = "Not connect.\n Verify Network." + xhr.responseText;
-                        } else if (xhr.status == 404) {
-                            msg = "Requested page not found. [404]" + xhr.responseText;
-                        } else if (xhr.status == 500) {
-                            msg = "Internal Server Error [500]." + xhr.responseText;
-                        } else if (exception === "parsererror") {
-                            msg = "Requested JSON parse failed.";
-                        } else if (exception === "timeout") {
-                            msg = "Time out error." + xhr.responseText;
-                        } else if (exception === "abort") {
-                            msg = "Ajax request aborted.";
-                        } else {
-                            msg = "Error:" + xhr.status + " " + xhr.responseText;
-                        }
-
                     }
                 });
 
+                function action(status) { 
+                    if(status == "Pending Validation"){
+                        return `<strong style="color:blue">${status}</strong>`
+                    }
+                    if(status == "Validated"){
+                        return `<strong style="color:green">${status}</strong>`
+                    }
+                    if(status == "On-Going"){
+                        return `<strong style="color:#8B8000">${status}</strong>`
+                    }
+                    if(status == "Not Started Yet"){
+                        return `<strong style="color:#9C3587">${status}</strong>`
+                    }
+                    if(status == "Disputed"){
+                        return `<strong style="color:red">${status}</strong>`
+                    }
 
-
+                }
                 //open modal for update 
                 $(document).on('click', '.updatejobdata', async function() {
                     console.log("i reached update step");
@@ -624,10 +635,6 @@ include "../config.php";
                 
 
                 // ajax update starts
-
-
-
-
                 $('#updateformofjobdata').submit(function(e) {
                     console.log("i reached inside form of update");
                     e.preventDefault();
@@ -638,6 +645,7 @@ include "../config.php";
                     console.log(uid , "am i working uid even");
                     fd.append("endpoint","/updatePrestation");
                     fd.append("id",uid);
+                    
                     $.ajax({
                         url: baseUrl,
                         dataType: "json",
@@ -683,6 +691,31 @@ include "../config.php";
 
                 // close modal for update
 
+                //restart job
+                $(document).on('click', '.restartjob', function() {
+                    var reid = $(this).attr('data-id');
+                    $('#btnRestartYes').attr('data-id', reid)
+                    $('#RestartModal').modal('show');
+                });
+                $(document).on('click', '#btnRestartYes', function() {
+                    let id = $(this).attr('data-id');
+                    $('#RestartModal').modal('hide');
+                    $.ajax({
+                        url: baseUrl,
+                        dataType: "json",
+                        type: 'POST',
+                        async: true,
+                        data:{endpoint:"/restart-prestation/",id:id},
+                        success: function(data) {
+                            $('#timeoutmsg').html("Restarted Successfully");
+                            setTimeout(() => {
+                                $('#timeoutmsg').html("");
+                                window.location.reload();
+                            }, 500)
+                        },
+                    });
+
+                });
 
                 //open modal for delete 
                 $(document).on('click', '.deletejobdata', function() {

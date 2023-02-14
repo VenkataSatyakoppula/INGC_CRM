@@ -448,11 +448,7 @@ include "../config.php";
                             if (data) {
                                 var output = '';
                                 data.forEach(item => {
-                                    output += `                    
-                                                  
-                                                   <option value = "${item.id}"  >${item.prenomClient}</option>
-                                                                                                       
-                    `;
+                                    output += `<option value = "${item.id}" >${item.prenomClient}</option>`;
                                 });
                                 $('#client-list-for-update').html(output);
                             } else {
@@ -510,7 +506,7 @@ include "../config.php";
                                             <td>${end_date_time.toLocaleString()}</td>
                                             <td>${item.commentaire}</td>
                                             <td>${item.clientcommentaire}</td>
-                                            <td style="color:red">Time Out</td>
+                                            <td>${action_history(item.status)}</td>
                                             
                                             <td id = "${item.id}"><button type="button" class="btn btn-primary btnupdate updatejobdata" update-id = "${item.id}" >UPDATE</button></td> 
                                             <td id = "${item.id}"><button type="button" class="btn btn-danger btndelete deletejobdata"  data-id = "${item.id}">DELETE</button></td> 
@@ -556,6 +552,22 @@ include "../config.php";
                 });
 
 
+                function action_history(status) { 
+                    if(status == "Pending Validation"){
+                        return `<strong style="color:red">Time out</strong>`
+                    }
+                    if(status == "Validated"){
+                        return `<strong style="color:green">${status}</strong>`
+                    }
+                    if(status == "On-Going"){
+                        return `<strong style="color:red">Time out</strong>`
+                    }
+                    if(status == "Not Started Yet" || status == "Disputed"){
+                        return `<strong style="color:red">Abandoned</strong>`
+
+                    }
+
+                }
 
                 //open modal for update 
                 $(document).on('click', '.updatejobdata', async function() {
@@ -707,8 +719,6 @@ include "../config.php";
                     $.ajax({
                         url: baseUrl,
                         dataType: "json",
-                        processData: false,
-                        contentType: false,
                         type: 'POST',
                         async: true,
                         data:{endpoint:"/deletePrestation",id:id},

@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
-
+import json
 from rest_framework.reverse import reverse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -16,7 +16,7 @@ from rest_framework import permissions
 
 from .permissions import IsOwnerOrReadOnly
 from .serializers import prestationSerializer1, PrestationSerializer, UserSerializer
-
+from datetime import datetime
 from .models import Client, Employe, Prestation, NewUser
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -87,7 +87,7 @@ def addPrestation(request):
             ref_client = Client.objects.get( id = request.data["ref_client"]),
             commentaire =  request.data["commentaire"],
             clientcommentaire = request.data["remarque_client"],
-            status = request.data["statut"],
+            status = "Not Started Yet",
             create_by = User.objects.get(email="scaleinfinite@gmail.com"),
         )
     newpresatation.save()
@@ -107,7 +107,6 @@ def UpdatePrestation(request, pk):
     prestations.ref_client = Client.objects.get( id = request.data["ref_client"])
     prestations.commentaire = request.data["commentaire"]
     prestations.clientcommentaire = request.data["remarque_client"]
-    prestations.status = request.data["statut"]
     prestations.save()
     serializer = prestationSerializer1(prestations)
     #serializer = PrestationSerializer(instance=prestations,data=request.data)
@@ -122,6 +121,67 @@ def DeletePrestation(request, pk):
     prestations = Prestation.objects.get(id=pk)
     prestations.delete()
     return Response("Prestation succesfully delete!")
+
+@api_view(['POST'])
+def Employee_checkin(request,pk):
+    prestations = Prestation.objects.get(id=pk)
+    prestations.checked_in = True
+    prestations.checkin_time = datetime.now().isoformat()
+    prestations.status = "On-Going"
+    prestations.save()
+    res= json.dumps({"success":"Employee Checked in Successfully","checkin":prestations.checkin_time,"status":prestations.status})
+    return Response(res)
+
+@api_view(['POST'])
+def Employee_checkout(request,pk):
+    prestations = Prestation.objects.get(id=pk)
+    if(prestations.checked_in):
+        prestations.checked_in = False
+        prestations.checkout_time = datetime.now().isoformat()
+        prestations.status = "Pending Validation"
+        prestations.save()
+        res= json.dumps({"success":"Employee Checked Out Successfully","checkout":prestations.checkout_time,"status":prestations.status})
+        return Response(res)
+    else:
+        return Response("Please Check-in First")
+
+@api_view(['POST'])
+def Client_Feedback(request,pk):
+    prestations = Prestation.objects.get(id=pk)
+    prestations.clientcommentaire = request.data["clientcommentaire"]
+    prestations.status = "Validated"
+    prestations.save()
+    serializer = prestationSerializer1(prestations)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def Employee_Feedback(request,pk):
+    prestations = Prestation.objects.get(id=pk)
+    if(prestations.checked_in): 
+        prestations.commentaire = request.data["commentaire"]
+        prestations.checked_in = False
+        prestations.checkout_time = datetime.now().isoformat()
+        prestations.status = "Pending Validation"
+        prestations.save()
+        serializer = prestationSerializer1(prestations)
+        return Response(serializer.data)
+    else:
+        return Response("Please Check-in First")
+
+@api_view(['POST'])
+def Restart_prestation(request,pk):
+    prestations = Prestation.objects.get(id=pk)
+    try:
+        prestations.clientcommentaire = request.data["clientcommentaire"]
+        prestations.status = "Disputed"
+    except KeyError:
+        prestations.status = "Not Started Yet"
+        prestations.checkin_time = prestations.checkout_time =  None
+    prestations.checked_in = False
+    prestations.save()
+    serializer = prestationSerializer1(prestations)
+    return Response(serializer.data)
+
 
 # nouvelle version commence à partir de là
 

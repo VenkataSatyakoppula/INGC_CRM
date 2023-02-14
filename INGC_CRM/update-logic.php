@@ -55,7 +55,12 @@ echo $_GET['id'];
 
 
 $putresult = callAPI('PUT','http://127.0.0.1:8000/authentication/update_service/'.$_GET['empid'].'/'.$_GET['id'],$updatedata);
-header("Location: index.php");
+
+if($_SESSION['role']==4) {
+   header("Location: superuser.php");
+}else{
+   header("Location: index.php");
+}
 die();    
 
 

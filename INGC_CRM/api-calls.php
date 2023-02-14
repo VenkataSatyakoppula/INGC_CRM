@@ -204,11 +204,36 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $url = $endp.$_POST["id"];
             $response = api_call($_POST,$url,'POST');
             echo $response;
+            break;
+        case '/check-in/':
+            $url = $endp.$_POST["id"]."/";
+            $response = api_call($_POST,$url,'POST');
+            echo $response;
+            break;
+        case '/check-out/':
+            $url = $endp.$_POST["id"]."/";
+            $response = api_call($_POST,$url,'POST');
+            echo $response;
+            break;
+        case '/client-feedback/':
+            $url = $endp.$_POST["id"]."/";
+            $response = api_call($_POST,$url,'POST');
+            echo $response;
+            break;
+        case '/employee-feedback/':
+            $url = $endp.$_POST["id"]."/";
+            $response = api_call($_POST,$url,'POST');
+            echo $response;
+            break;
+        case '/restart-prestation/':
+            $url = $endp.$_POST["id"]."/";
+            $response = api_call($_POST,$url,'POST');
+            echo $response;
+            break;
         default:
             # code...
             break;
     }
-
 }
 
 

@@ -385,30 +385,34 @@
                                 contentType: false,
                                 data: fd,
                                 // data: {clientData : dataString},
-
                                 success: function(data) {
+                                    if(typeof data !== 'object' && data !== null){
+                                        $('#timeoutmsg').html("Email already Exists, please try again").css("color","red");
+                                    }else{
+                                        console.log("else condition")
+                                        console.log(data.prenomClient)
+                                        $('#timeoutmsg').html("Client Added Successfully, Redirecting..").css("color","black");
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "../register-logic.php",
+                                            data: {
+                                                name:data["prenomClient"],
+                                                email:data["emailClient"],
+                                                password:fd.get("mdpEmploye"),
+                                                role:3,
+                                                ref_id:data["id"]
+                                            },
+                                            dataType: 'json',
+                                            success: function (data) {
+                                                console.log("success");
+                                            },
+                                        });
+                                        setTimeout(()=>{
+                                            location.href = "./viewClient.php"
+                                        }, 1000)
+                                        document.getElementById("addclientdata").reset();
+                                    }
 
-                                    console.log(data , "i am the data after ajax call is completed");
-                                    $('#timeoutmsg').html("Client Added Successfully, Redirecting..");
-                                    $.ajax({
-                                        type: "POST",
-                                        url: "../register-logic.php",
-                                        data: {
-                                            name:data["prenomClient"],
-                                            email:data["emailClient"],
-                                            password:fd.get("mdpEmploye"),
-                                            role:3,
-                                            ref_id:data["id"]
-                                        },
-                                        dataType: 'json',
-                                        success: function (data) {
-                                            console.log("success");
-                                        },
-                                    });
-                                    setTimeout(()=>{
-                                        location.href = "./viewClient.php"
-                                    }, 1000)
-                                    document.getElementById("addclientdata").reset();
 
                                 },
                                 error: function(xhr, exception) {

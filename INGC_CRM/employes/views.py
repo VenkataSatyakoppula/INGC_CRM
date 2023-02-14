@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate
 from employes.models import Employe
+from clients.models import Client
 from prestations.models import Prestation
 from prestations.serializers import prestationSerializer1
 from rest_framework.views import APIView
@@ -10,7 +11,7 @@ from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
 from rest_framework import status
 from .serializers import employeSerializer2, employeSerializer1, EmployeLoginSerializer
-
+import json
 
 # Create your views here.
 
@@ -55,6 +56,8 @@ def employeDetail(request, pk):
 @api_view(['POST'])
 def addEmploye(request):
     serializer = employeSerializer2(data=request.data)
+    if(Client.objects.filter(emailClient=request.data["emailEmploye"]).exists() or Employe.objects.filter(emailEmploye=request.data["emailEmploye"]).exists()):
+        return Response(json.dumps({"status":"email already exists"}))
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)
@@ -63,6 +66,8 @@ def addEmploye(request):
 @api_view(['POST'])
 def UpdateEmploye(request, pk):
     employes = Employe.objects.get(id=pk)
+    if((Client.objects.filter(emailClient=request.data["emailEmploye"]).exists() or Employe.objects.filter(emailEmploye=request.data["emailEmploye"]).exists()) and employes.emailEmploye != request.data["emailEmploye"]):
+        return Response(json.dumps({"status":"email already exists"}))
     serializer = employeSerializer2(instance = employes,data=request.data)
     print(serializer.is_valid())
     if serializer.is_valid():

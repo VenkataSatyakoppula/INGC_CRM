@@ -276,7 +276,36 @@
 
         ?>
 
+        <div id="checkout-modal" class="modal fade">
+            <div class="modal-dialog modal-confirm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Employee FeedBack</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="employee-feedback">
+                        <div id="form1">
+                                <div class="modal-update-body">
 
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label my-1">Commentaire</label>
+                                        <div class="col-sm-10">
+                                            <textarea name="commentaire" id="commentaire" cols="55" rows="10">No feedback.</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                         </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                        <input type="submit" class="btn btn-danger" value="CHECKOUT" data-id="" id="btncheckoutYes"></input>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
         <div class="content-body" style="min-height: 876px;">
 
@@ -285,7 +314,7 @@
                 <div class="row">
                     <div class="col-lg-12">
 
-                        <h2>On-Going Jobs</h2>
+                        <h2>Active Jobs | Dashboard</h2>
 
                         <div class="card">
                             <div class="card-body">
@@ -301,8 +330,11 @@
                                                     <th>CLIENT NAME</th>
                                                     <th>START TIME</th>
                                                     <th>END TIME</th>
+                                                    <th>CLIENT FEEDBACK</th>
                                                     <th>STATUS OF THE WORK</th>
 
+                                                    <th>LAST CHECK IN</th>
+                                                    <th>ACTION</th>
                                                 </tr>
                                             </thead>
 
@@ -403,21 +435,25 @@
                 var count = 1;
                 data.forEach(item => {
                     var end_date_time = new Date(item.heureDepart);
-                    var start_time = new Date(item.heureArrivee)
+                    var start_time = new Date(item.heureArrivee);
+                    var checkin = new Date(item.checkin_time);
+
                     var current = new Date();
                     if(end_date_time > current){
-                    output += `
-                    
-                    <tr>
-                                                    <td>${count}</td>
-                                                    <td>${item.nomPrestation}</td>
-                                                    <td>${item.ref_client.nomClient}</td>
-                                                    <td>${start_time.toLocaleString()}</td>
-                                                    <td>${end_date_time.toLocaleString()}</td>
-                                                    <td>${item.status}</td>
-                                                </tr>
-                    `;
-                    count = count+1;
+                            output += ` 
+                            <tr>
+                                <td>${count}</td>
+                                <td>${item.nomPrestation}</td>
+                                <td>${item.ref_client.nomClient}</td>
+                                <td>${start_time.toLocaleString()}</td>
+                                <td>${end_date_time.toLocaleString()}</td>
+                                <td>${item.clientcommentaire}</td>
+                                <td id="status${item.id}"><strong>${action(item.id,item.checkout_time,item.status,"status")}</strong></td>
+                                <td id="check_in${item.id}" >${(item.checkin_time)?(checkin.toLocaleString()):"Not checked In"}</td>
+                                <td id="action${item.id}">${action(item.id,item.checkout_time,item.status,"action")}</td>
+                            </tr>
+                            `;
+                        count = count+1;
                     }
                 });
                 if(count==1){
@@ -426,33 +462,98 @@
                     $('#empJobDetails').html(output);
                 }
             }
-else{
-    $('#empJobDetails').html("<tr><td colspan = '6'>No data found</td></tr>");
-    
-}
+                else{
+                    $('#empJobDetails').html("<tr><td colspan = '6'>No data found</td></tr>");
+                    
+                }
+                } });
 
-
-        },
-        error: function (xhr, exception) {
-            var msg = "";
-            if (xhr.status === 0) {
-                msg = "Not connect.\n Verify Network." + xhr.responseText;
-            } else if (xhr.status == 404) {
-                msg = "Requested page not found. [404]" + xhr.responseText;
-            } else if (xhr.status == 500) {
-                msg = "Internal Server Error [500]." +  xhr.responseText;
-            } else if (exception === "parsererror") {
-                msg = "Requested JSON parse failed.";
-            } else if (exception === "timeout") {
-                msg = "Time out error." + xhr.responseText;
-            } else if (exception === "abort") {
-                msg = "Ajax request aborted.";
-            } else {
-                msg = "Error:" + xhr.status + " " + xhr.responseText;
+    function action(user_id,check_out_time,status,flag) { 
+        
+        if(status == "Pending Validation" || status == "Validated"){
+            if(flag == "status" && status == "Pending Validation"){
+                return `<strong style="color:blue">${status}</strong>`
+            }else if(flag == "status" && status == "Validated"){
+                return `<strong style="color:green">${status}</strong>`
+            }else{
+                var checkout = new Date(check_out_time);
+                return "<p style='color:red'>Checked out at: <strong>"+checkout.toLocaleString()+"</strong></p>";
             }
-           
+        }else if(status == "On-Going"){
+            if(flag== "status"){
+                return `<strong style="color:#8B8000">${status}</strong>`
+            }else{
+                return `<button class="btn btn-danger checkout" data-id=${user_id}>CHECK OUT</button>`;
+            }
+        }else if(status == "Not Started Yet" || status == "Disputed"){
+            if(flag == "status"){
+                if(status == "Disputed"){
+                    return `<strong style="color:red">${status}</strong>`
+                }else{
+                    return `<strong style="color:#9C3587">${status}</strong>`
+                }
+            }
+            return `<button class="btn btn-primary checkin" data-id=${user_id}>CHECK IN</button>`
         }
-    }); 
+    } 
+
+    $(document).on('click',".checkin",function(){
+        console.log("checkin clicked");
+        let id = $(this).attr("data-id");
+        $.ajax({
+        url: baseUrl,
+        dataType: "json",
+        type: "POST",
+        async: true,
+        data: { endpoint:"/check-in/", id: id  },
+        success: function (data) {
+           console.log(data);
+            if (data){
+                data = JSON.parse(data)
+                let lastchecked_in =new  Date(data.checkin);
+                $("#action"+id).html(`<button class="btn btn-danger checkout" data-id=${id}>CHECK OUT</button>`)
+                $("#check_in"+id).text(lastchecked_in.toLocaleString())
+                $("#status"+id).html("<strong style='color:#8B8000'>"+data.status+"</strong>")
+            }
+        }
+        });
+    });
+
+    $(document).on('click',".checkout",function(){
+        console.log("checkout clicked");
+        let id = $(this).attr("data-id");
+        $("#btncheckoutYes").attr("data-id",id);
+        $("#checkout-modal").modal("show");
+    });
+
+    $("#employee-feedback").submit(function (e) { 
+        e.preventDefault()
+        var fd = new FormData(this);
+        let id = $("#btncheckoutYes").attr("data-id");
+        fd.append("endpoint","/employee-feedback/");
+        fd.append("id",id);
+
+        $.ajax({
+            url: baseUrl,
+            dataType: "json",
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            async: true,
+            data: fd,
+            success: function(data) {
+                $('#checkout-modal').modal('hide');
+                let checkout = new Date(data.checkout_time);
+                $("#action"+id).html("<p style='color:red'>Checked out at: <strong>"+checkout.toLocaleString()+"</strong></p>")
+                $("#status"+id).html("<strong style='color:blue'>"+data.status+"</strong>")
+            },
+        });
+
+
+
+    });
+
+
 });
 </script>
 

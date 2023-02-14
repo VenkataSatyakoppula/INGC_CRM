@@ -155,11 +155,10 @@ def add_service(request):
 def list(request,id):
     
     # if 'email' in session:
-        data = conn.execute(f"select * from Services WHERE Employee_ID ='{id}'");  
+        data = conn.execute(f"select * from Services");  
     
         records = []
-    
-  
+        name=""
         for row in data:
             record = {}
             record["ID"] = row[0]
@@ -169,9 +168,11 @@ def list(request,id):
             # record["Employee"] = str(row[4])
             employee = str(row[4])
             emp_data = conn.execute("select NAME from Employees where ID='"+employee+"'")
+            print(emp_data)
             for each in emp_data:
                 name = each[0]
             record["Employee"] = name
+            record["empid"] = row[4]
         
         
             records.append(record)
@@ -193,7 +194,8 @@ def update_service(request,eid,id):
         START_TIME = data.get("start_time")
         END_TIME = data.get("end_time")
 
-        conn.execute("UPDATE Services SET SERVICE_NAME= '"+service_name+"', START_TIME='"+START_TIME+"',END_TIME='"+END_TIME+"' WHERE ID = '"+id+"' AND Employee_ID='"+eid+"';")
+        conn.execute("UPDATE Services SET SERVICE_NAME= '"+service_name+"', START_TIME='"+START_TIME+"',END_TIME='"+END_TIME+"' WHERE ID = '"+str(id)+"' AND Employee_ID='"+str(eid)+"';")
+        conn.commit()
         return Response({"result": "Services Updated successfully","status":200})
     # else:
     #     return jsonify({"result":"you are not logged in"}),401,{'ContentType':'application/json'}
@@ -203,8 +205,8 @@ def update_service(request,eid,id):
 # @app.route('/delete_service/<eid>/<id>',methods=['DELETE'])
 @api_view(['DELETE'])
 def delete_service(request,eid,id):
-    conn.execute("DELETE FROM Services where ID='"+id+"' AND Employee_ID='"+eid+"'")
-    
+    conn.execute("DELETE FROM Services where ID='"+str(id)+"' AND Employee_ID='"+str(eid)+"'")
+    conn.commit()
     return Response({"result": "Services Deleted successfully","status":200})
 
 #view employees list endpoint
@@ -275,37 +277,3 @@ def managerDetail(request,id):
    
 
 
-# #endpoint for deleting employees table
-# @app.route('/dropemployees')
-# def dropemployees():
-    
-#     conn.execute("DROP TABLE Employees")
-#     return jsonify({"result":"dropped table employees"})
-
-# #endpoint for deleting services table
-# @app.route('/dropservices')
-# def dropservices():
-    
-#     conn.execute("DROP TABLE Services")
-#     return jsonify({"result":"dropped table employees"})     
-
-
-    
-# #endpoint for testing
-# @app.route('/emp',methods=['GET'])
-# def emp():
-
-#     # if 'email' in session:
-#         emaildata = conn.execute("SELECT * FROM Employees")
-#         data = []
-
-#         for row in emaildata:
-#             data.append(row[2])
-
-#         print(data)
-
-#         print('manju@gmail.com' in data)    
-
-#         return jsonify(data)
-#     # else:
-#     #     return jsonify({"result":"you are not logged in"}),401

@@ -49,8 +49,14 @@ function callAPI($method, $url, $data){
 session_start();
 
 
-callAPI('DELETE','http://127.0.0.1:8000/authentication/delete_service/'.$_SESSION['id'].'/'.$_GET['id'],false);
-header("Location: index.php");
+callAPI('DELETE','http://127.0.0.1:8000/authentication/delete_service/'.$_GET['eid'].'/'.$_GET['id'],false);
+
+if($_SESSION['role']==4) {
+   header("Location: superuser.php");
+}else{
+   header("Location: index.php");
+}
+
 die();    
 
 

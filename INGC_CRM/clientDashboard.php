@@ -287,11 +287,72 @@
             curl_close($curl);
             return $response;
         }
-
-
         ?>
+        <div id="Validate-modal" class="modal fade">
+            <div class="modal-dialog modal-confirm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="icon-box">
+                            <i class="material-icons">&#xE5CD;</i>
+                        </div>
+                        <h4 class="modal-title">Validate Work</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="client-feedback">
+                        <div id="form1">
+                                <div class="modal-update-body">
 
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label my-1">Commentaire</label>
+                                        <div class="col-sm-10">
+                                            <textarea name="clientcommentaire" id="clientcommentaire" cols="60" rows="10" required></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                         </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                        <input type="submit" class="btn btn-success" value="VALIDATE" data-id="" id="btnValidateYes"></input>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
+        <div id="dispute-modal" class="modal fade">
+            <div class="modal-dialog modal-confirm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Dispute Work (Cannot Edit again)</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="dispute-feedback">
+                        <div id="form1">
+                                <div class="modal-update-body">
+
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label my-1">Commentaire </label>
+                                        <div class="col-sm-10">
+                                            <textarea name="clientcommentaire" id="clientcommentaire" cols="60" rows="10" required></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                         </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                        <input type="submit" class="btn btn-danger" value="RESTART WORK" data-id="" id="btnDisputeYes"></input>
+
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
         <div class="content-body" style="min-height: 876px;">
 
@@ -312,12 +373,14 @@
                                             <thead>
                                                 <tr>
                                                     <th>S.NO.</th>
-                                                    <th>NOM DE LA PRESTATION/th>
+                                                    <th>NOM DE LA PRESTATION </th>
                                                     <th>NOM DE L'EMPLOYE</th>
                                                     <th>HEURE DE DEBUT</th>
                                                     <th>HEURE DE FIN</th>
                                                     <th>STATUS DE LA PRESTATION</th>
-
+                                                    <th>EMPLOYEE FEEDBACK</th>
+                                                    <th>YOUR FEEDBACK</th>
+                                                    <th>VALIDATE</th>
                                                 </tr>
                                             </thead>
 
@@ -414,6 +477,9 @@ $(()=>{
         async: true,
         data: { endpoint: `/clients/clientPrestations`,id:id },
         success: function (data) {
+            if(typeof data != 'object'){
+                location.href = "./logout.php"
+            }
             if (data){
                 var output = '';
                 var count = 1;
@@ -430,7 +496,10 @@ $(()=>{
                                                     <td>${item.ref_employe.nomEmploye}</td>
                                                     <td>${start_time.toLocaleString()}</td>
                                                     <td>${end_date_time.toLocaleString()}</td>
-                                                    <td>${item.status}</td>
+                                                    <td id="status${item.status}">${validate(item.status,item.id,item.checkin_time,"status")}</td>
+                                                    <td>${item.commentaire}</td>
+                                                    <td>${item.clientcommentaire}</td>
+                                                    <td id="validate_row${item.id}">${validate(item.status,item.id,item.checkin_time,"action")}</td>
                                                 </tr>
                     `;
                     count = count +1;
@@ -446,8 +515,6 @@ else{
     $('#viewClientjobs').html("<tr><td colspan = '6'>No data found</td></tr>");
     
 }
-
-
         },
         error: function (xhr, exception) {
             var msg = "";
@@ -468,7 +535,134 @@ else{
             }
            
         }
-    }); 
+    });
+    function validate(status,user_id,checkin,flag) {
+        if(status == "Pending Validation" ){
+            if(flag == "status"){
+                return `<strong style="color:blue">${status}</strong>`
+            }else{
+                return `<button class="btn btn-success validate" data-id=${user_id}>VALIDATE</button><button class="m-2 btn btn-danger dispute" data-id=${user_id}>DISPUTE</button>`
+            }
+        }else if(status == "Not Started Yet" || status == "Disputed"){
+            if(flag == "status"){
+                if(status == "Disputed"){
+                    return `<strong style="color:red">${status}</strong>`
+                }else{
+                    return `<strong style="color:#9C3587">${status}</strong>`
+                }
+            }else{
+                return `Employee Not Cheked in yet`
+            }
+        }else if(status == "On-Going"){
+            if(flag== "status"){
+                return `<strong style="color:#8B8000">${status}</strong>`
+            }else{
+                let check_in = new Date(checkin)
+                return `<strong>Employee Checked in at: ${check_in.toLocaleString()}</strong>`
+            }
+        }else if(status == "Validated"){
+            $("#status"+user_id).text(status).css("color","green")
+            if(flag == "status"){
+                return `<strong style="color:green">${status}</strong>`
+            }else{
+                return `<button class="btn btn-warning validate" data-id=${user_id}>Edit</button>`
+            }
+        }
+    }
+
+    $(document).on('click',".validate",function(){
+        let id = $(this).attr("data-id");
+        $("#btnValidateYes").attr("data-id",id);
+        
+        $("#Validate-modal").modal("show");
+    });
+
+    $(document).on('click',".dispute",function(){
+        let id = $(this).attr("data-id");
+        $("#btnDisputeYes").attr("data-id",id);
+        
+        $("#dispute-modal").modal("show");
+    });
+
+    $("#client-feedback").submit(function (e) { 
+        e.preventDefault()
+        var fd = new FormData(this);
+        console.log("hello")
+        let uid = $("#btnValidateYes").attr("data-id");
+        fd.append("endpoint","/client-feedback/");
+        fd.append("id",uid);
+        console.log(uid)
+        $.ajax({
+            url: baseUrl,
+            dataType: "json",
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            async: true,
+            data: fd,
+            success: function(data) {
+                console.log(data, "i am the data after update job is completed");
+                console.log("update is done");
+                $('#Validate-modal').modal('hide');
+                $("#validate_row"+uid).html(`<button class="btn btn-warning validate" data-id=${uid}>Edit</button>`);
+                setTimeout(() => {
+                    $('#timeoutmsg').html("");
+                    window.location.reload();
+                }, 500)
+            },
+            error: function(xhr, exception) {
+                var msg = "";
+                if (xhr.status === 0) {
+                    msg = "Not connect.\n Verify Network." + xhr.responseText;
+                } else if (xhr.status == 404) {
+                    msg = "Requested page not found. [404]" + xhr.responseText;
+                } else if (xhr.status == 500) {
+                    msg = "Internal Server Error [500]." + xhr.responseText;
+                } else if (exception === "parsererror") {
+                    msg = "Requested JSON parse failed.";
+                } else if (exception === "timeout") {
+                    msg = "Time out error." + xhr.responseText;
+                } else if (exception === "abort") {
+                    msg = "Ajax request aborted.";
+                } else {
+                    msg = "Error:" + xhr.status + " " + xhr.responseText;
+                }
+            }
+        });
+    });
+
+    $("#dispute-feedback").submit(function (e) { 
+        e.preventDefault()
+        var fd = new FormData(this);
+        let uid = $("#btnDisputeYes").attr("data-id");
+        fd.append("endpoint","/restart-prestation/");
+        fd.append("id",uid);
+        $.ajax({
+            url: baseUrl,
+            dataType: "json",
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            async: true,
+            data: fd,
+            success: function(data) {
+                console.log(data, "i am the data after update job is completed");
+                console.log("update is done");
+                $('#Validate-modal').modal('hide');
+                $("#validate_row"+uid).html(`Employee Not Cheked in yet`);
+
+                setTimeout(() => {
+                    $('#timeoutmsg').html("");
+                    window.location.reload();
+                }, 500)
+            },
+        });
+    });
+
+
+
+
+    
 });
 </script>
 

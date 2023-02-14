@@ -245,13 +245,6 @@ include "../config.php";
                                         </div>
                                     </div>
 
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Current Status of Job</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" placeholder="Current status" name="statut" id="statut">
-                                        </div>
-                                    </div>
-
                                     <div class=" d-flex justify-content-between">
                                         <button type="submit" class="btn btn-dark">ADD</button>
 
@@ -414,14 +407,51 @@ include "../config.php";
                         e.preventDefault();
                     }).validate({
                         rules:{
-
+                            nomPrestation:{
+                                required: true,
+                                minlength: 3
+                            },
+                            commentaire:{
+                                required: true,
+                                minlength: 3
+                            },
+                            remarque_client:{
+                                required: true,
+                                minlength: 3
+                            },
+                            heureArrivee:{
+                                required: true
+                            },
+                            heureDepart:{
+                                required: true
+                            }
                         },
                         messages:{
-
+                            nomClient: {
+                                required: "Please enter nomPrestation",
+                                minlength: "nomPrestation must be at least 3 characters"
+                            },
+                            commentaire:{
+                                required: "Please enter commentaire",
+                                minlength: "commentaire must be at least 3 characters"
+                            },
+                            remarque_client:{
+                                required: "Please enter remarque_client",
+                                minlength: "remarque_client must be at least 3 characters"
+                            },
+                            heureArrivee:{
+                                required: "Please select heureArrivee"
+                            },
+                            heureDepart:{
+                                required: "Please select heureDepart"
+                            },
+                        },
+                        errorPlacement: function(error, element) {
+                            error.insertAfter(element).css("color","red");
                         },
                         submitHandler: function (form) { 
                         console.log('add button clicked!')
-                        var fd = new FormData(this);
+                        var fd = new FormData(form);
                         console.log(fd, "i am form data");
                         fd.append("endpoint","/addPrestation");
                         $.ajax({
@@ -437,9 +467,9 @@ include "../config.php";
                                 $('#timeoutmsg').html("Job Added Successfully");
                                 setTimeout(() => {
                                     $('#timeoutmsg').html("");
-                                }, 2000)
+                                    location.href = "./viewJob.php"
+                                }, 500)
                                 document.getElementById("addjobdata").reset();
-
                             },
                             error: function(xhr, exception) {
                                 var msg = "";

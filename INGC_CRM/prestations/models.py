@@ -16,6 +16,9 @@ class Prestation(models.Model):
     commentaire = models.CharField(max_length=1000, null=True)
     clientcommentaire = models.CharField(max_length=1000, null=True)
     status = models.CharField(max_length=1000, null=True)
+    checkin_time = models.DateTimeField(auto_now_add=False,null=True)
+    checkout_time = models.DateTimeField(auto_now_add=False,null=True)
+    checked_in = models.BooleanField(default=False)
     create_by = models.ForeignKey(NewUser, related_name='prestations', on_delete=models.CASCADE, null=True)
 
     class Meta:

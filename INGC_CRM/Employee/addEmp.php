@@ -363,29 +363,32 @@ include "../config.php";
                                 async: true,
                                 data: fd,
                                 success: function(data) {
-                                    console.log(data , "i am the data after ajax call is completed");
-                                    $.ajax({
-                                        type: "POST",
-                                        url: "../register-logic.php",
-                                        data: {
-                                            name:data["prenomEmploye"],
-                                            email:data["emailEmploye"],
-                                            password:fd.get("mdpEmploye"),
-                                            role:2,
-                                            ref_id:data["id"]
-                                        },
-                                        dataType: 'json',
-                                        success: function (data) {
-                                            console.log("success");
-                                        },
-                                        
-                                    });
-                                    $('#timeoutmsg').html("Employee Added Successfully");
-                                    setTimeout(()=>{
-                                        location.href = "./viewEmp.php"
-                                    }, 2000)
-                                    document.getElementById("addemployeedata").reset();
-
+                                    if(typeof data !== 'object' && data !== null){
+                                        $('#timeoutmsg').html("Email already Exists, please try again").css("color","red");
+                                    }else{
+                                        console.log(data , "i am the data after ajax call is completed");
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "../register-logic.php",
+                                            data: {
+                                                name:data["prenomEmploye"],
+                                                email:data["emailEmploye"],
+                                                password:fd.get("mdpEmploye"),
+                                                role:2,
+                                                ref_id:data["id"]
+                                            },
+                                            dataType: 'json',
+                                            success: function (data) {
+                                                console.log("success");
+                                            },
+                                            
+                                        });
+                                        $('#timeoutmsg').html("Employee Added Successfully");
+                                        setTimeout(()=>{
+                                            location.href = "./viewEmp.php"
+                                        }, 1000)
+                                        document.getElementById("addemployeedata").reset();
+                                }
                                 },
                                 error: function(xhr, exception) {
                                     var msg = "";

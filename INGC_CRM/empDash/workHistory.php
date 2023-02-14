@@ -287,7 +287,7 @@
                                                         <td>${item.ref_client.nomClient}</td>
                                                         <td>${start_time.toLocaleString()}</td>
                                                         <td>${end_date_time.toLocaleString()}</td>
-                                                        <td style="color:red">Time out</td>
+                                                        <td>${action_history(item.status)}</td>
                                                     </tr>
                         `;
                         count = count +1;
@@ -321,6 +321,22 @@
             
             }
         }); 
+        function action_history(status) { 
+                    if(status == "Pending Validation"){
+                        return `<strong style="color:red">Time out</strong>`
+                    }
+                    if(status == "Validated"){
+                        return `<strong style="color:green">${status}</strong>`
+                    }
+                    if(status == "On-Going"){
+                        return `<strong style="color:red">Time out</strong>`
+                    }
+                    if(status == "Not Started Yet" || status == "Disputed"){
+                        return `<strong style="color:red">Abandoned</strong>`
+
+                    }
+
+                }
     });
 </script>
 

@@ -229,6 +229,7 @@ include "../config.php";
                                     </div>
 
                                 </div>
+                                <span id="error"></span>
                                 <div class="modal-footer">
                                     <input id="submit" type="submit" value="UPDATE" update-id="" class="btn btn-dark afterupdate" />
 
@@ -262,7 +263,6 @@ include "../config.php";
                                                 <th> PRENOM</th>
                                                     <th> NOM DE FAMILLE</th>
                                                     <th>TELEPHONE</th>
-                                                    <th>AGE</th>
                                                     <th>ADRESSE</th>
                                                     <th>E-MAIL</th>
                                                     <th>CLIENT ID</th>
@@ -368,18 +368,15 @@ include "../config.php";
                                 output += `
                     
                     <tr>
-                                                    <td>${item.prenomEmploye}</td>
-                                                    <td>${item.nomEmploye}</td>
-                                                    <td>${item.telEmploye}</td>
-                                                    <td>${item.addressEmploye}</td>
-                                                    <td>${item.emailEmploye}</td>
-                                                    <td>${item.id}</td>
-                                                    <td id = "${item.id}"><button type="button" class="btn btn-primary btnupdate updatejobdata" update-id = "${item.id}" >UPDATE</button></td> 
-                                                    <td id = "${item.id}"><button type="button" class="btn btn-danger btndelete deletejobdata"  data-id = "${item.id}">DELETE</button></td> 
-                                                 
-
-
-                                                </tr>
+                    <td>${item.prenomEmploye}</td>
+                    <td>${item.nomEmploye}</td>
+                    <td>${item.telEmploye}</td>
+                    <td>${item.addressEmploye}</td>
+                    <td>${item.emailEmploye}</td>
+                    <td>${item.id}</td>
+                    <td id = "${item.id}"><button type="button" class="btn btn-primary btnupdate updatejobdata" update-id = "${item.id}" >UPDATE</button></td> 
+                    <td id = "${item.id}"><button type="button" class="btn btn-danger btndelete deletejobdata"  data-id = "${item.id}">DELETE</button></td> 
+                </tr>
                     `;
                             });
                             $('#employee-list').html(output);
@@ -387,8 +384,6 @@ include "../config.php";
                             $('#employee-list').html("<tr><td colspan = '6'>No data found</td></tr>");
 
                         }
-
-
                     },
                     error: function(xhr, exception) {
                         var msg = "";
@@ -407,17 +402,14 @@ include "../config.php";
                         } else {
                             msg = "Error:" + xhr.status + " " + xhr.responseText;
                         }
-
                     }
                 });
-
                       //open modal for delete 
                     $(document).on('click', '.deletejobdata', function() {
                     console.log("i reached delete step");
                     var delid = $(this).attr('data-id');
                     console.log(delid, " i am delete id");
-                    $('#btnDelteYes').attr('data-id', delid)
-
+                    $('#btnDelteYes').attr('data-id', delid);
                     $('#myDeleteModal').modal('show');
 
                 });
@@ -431,12 +423,12 @@ include "../config.php";
                     $('#myDeleteModal').modal('hide');
                     $.ajax({
                         url: baseUrl,
-                                type: 'POST',
-                                dataType: "json",
-                                data:{endpoint:"/employes/employeeDeleteJobs",id:id},
-                                success: function(data){
-                                    console.log("success");
-                                },
+                        type: 'POST',
+                        dataType: "json",
+                        data:{endpoint:"/employes/employeeDeleteJobs",id:id},
+                        success: function(data){
+                            console.log("success");
+                        },
                     });
                     $.ajax({
                         url: baseUrl,
@@ -444,7 +436,6 @@ include "../config.php";
                         async: true,
                         data: {endpoint:"/employes/deleteEmploye",id:id},
                         success: function(data) {
-                            console.log(data, "i am the data after ajax call is completed");
                             $('#timeoutmsg').html("Deleted Successfully");
                             $.ajax({
                                 url: baseUrl,
@@ -458,25 +449,6 @@ include "../config.php";
                             setTimeout(() => {
                                 $('#timeoutmsg').html("");
                             }, 2000)
-
-                        },
-                        error: function(xhr, exception) {
-                            var msg = "";
-                            if (xhr.status === 0) {
-                                msg = "Not connect.\n Verify Network." + xhr.responseText;
-                            } else if (xhr.status == 404) {
-                                msg = "Requested page not found. [404]" + xhr.responseText;
-                            } else if (xhr.status == 500) {
-                                msg = "Internal Server Error [500]." + xhr.responseText;
-                            } else if (exception === "parsererror") {
-                                msg = "Requested JSON parse failed.";
-                            } else if (exception === "timeout") {
-                                msg = "Time out error." + xhr.responseText;
-                            } else if (exception === "abort") {
-                                msg = "Ajax request aborted.";
-                            } else {
-                                msg = "Error:" + xhr.status + " " + xhr.responseText;
-                            }
 
                         }
                     });
@@ -528,6 +500,9 @@ include "../config.php";
                         async: true,
                         data: fd,
                         success: function(data) {
+                            if(typeof data !== 'object' && data !== null){
+                                $('#error').html("Email already Exists, please try again").css("color","red");
+                            }else{
                             console.log(data, "i am the data after update job is completed");
                             console.log("update is done");
                             $('#myUpdateModal').modal('hide');
@@ -548,7 +523,7 @@ include "../config.php";
                                 $('#timeoutmsg').html("");
                                 window.location.reload();
                             }, 500)
-
+                        }
                         },
                         error: function(xhr, exception) {
                             var msg = "";
@@ -567,7 +542,6 @@ include "../config.php";
                             } else {
                                 msg = "Error:" + xhr.status + " " + xhr.responseText;
                             }
-
                         }
                     });
                 });

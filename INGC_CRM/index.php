@@ -410,6 +410,7 @@
 
             <div class="container-fluid mt-3">
                 <h1>Hello,  <?php echo $_SESSION['name']; ?>!</h1>
+                <h2>List of All Services!</h2>
 
                 <div class="row">
                     <div class="col-lg-12">
@@ -422,7 +423,7 @@
                                         <table class="table table-xs mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th>NAME</th>
+                                                    <th>CREATOR </th>
                                                     <th>SERVICE</th>
                                                     <th>START TIME</th>
                                                     <th>END TIME</th>
@@ -445,19 +446,31 @@
                                                 // echo var_dump($get_data);
 
                                                 for ($i = 0; $i < count($get_data); $i++) {
-                                                    error_reporting(E_ALL ^ E_NOTICE);  ?>
+                                                    error_reporting(E_ALL ^ E_NOTICE);
+                                                    
+                                                    ?>
+                                                    
                                                     <tr>
                                                         <td id="<?php echo $get_data[$i]->ID ?>"><?php echo $get_data[$i]->Employee; ?></td>
                                                         <td><?php echo $get_data[$i]->SERVICE_NAME; ?></td>
                                                         <td><?php echo  $get_data[$i]->START_TIME; ?></td>
                                                         <td><?php echo  $get_data[$i]->END_TIME; ?></td>
                                                         <!-- <td class="td"><button class="updatebutton" id="udpatebutton">UPDATE</button></td> -->
+                                                        <?php if($get_data[$i]->empid == $_SESSION["id"]) {?>
                                                         <td>
                                                             <div class="viewlinkupdate"><a class="updatelink" href="update.php?empid=<?php echo $_SESSION['id'] ?>&id=<?php echo $get_data[$i]->ID ?>&servicename=<?php echo $get_data[$i]->SERVICE_NAME ?>&starttime=<?php echo $get_data[$i]->START_TIME ?>&endtime=<?php echo $get_data[$i]->END_TIME; ?>">UPDATE</a></div>
                                                         </td>
                                                         <td>
                                                             <div class="viewlinkdelete"><a href="delete.php?eid=<?php echo  $_SESSION['id'] ?>&id=<?php echo $get_data[$i]->ID; ?>">DELETE</a></div>
                                                         </td>
+                                                        <?php }else{?>
+                                                            <td>
+                                                            <strong>Update Not Allowed!</strong>
+                                                        </td>
+                                                        <td>
+                                                        <strong> Delete Not Allowed!</strong>
+                                                        </td>
+                                                            <?php }?>
                                                     </tr>
 
 
