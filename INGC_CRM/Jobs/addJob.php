@@ -182,8 +182,12 @@ include "../config.php";
         <div class="content-body" style="min-height: 876px;">
 
             <div class="container-fluid mt-3">
+
                 <div class="w-75 col-lg-12 mx-auto mt-5">
+                <span class="text-primary"><strong>Tip: Add new services and select here!!
+                        </strong></span> 
                     <div class="card">
+
                         <div class="card-body">
                             <h4 class="card-title">Add Job</h4>
                             <div class="basic-form">
@@ -191,13 +195,15 @@ include "../config.php";
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">Job Name</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" placeholder="Job Name" id="nomPrestation" name="nomPrestation">
-                                        
+                                            <!-- <input type="text" class="form-control" placeholder="Job Name" id="nomPrestation" name="nomPrestation"> -->
+                                            <select id="service-list"  class="form-select form-select-sm" aria-label=".form-select-sm example" id="nomPrestation" name="nomPrestation" >
+
+                                            </select>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Employee Name</label>
+                                        <label class="col-sm-2 col-form-label">Employee Email</label>
                                         <div class="col-sm-10">
                                            
                                             <select id="employee-list"  class="form-select form-select-sm" aria-label=".form-select-sm example" id="ref_employe" name="ref_employe" >
@@ -209,7 +215,7 @@ include "../config.php";
 
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Client Name</label>
+                                        <label class="col-sm-2 col-form-label">Client Email</label>
                                         <div class="col-sm-10">
                                             
                                             <select id="client-list" class="form-select form-select-sm" aria-label=".form-select-sm example" id="ref_client" name="ref_client">
@@ -314,7 +320,7 @@ include "../config.php";
                                     outputEmp += `
                     
                                 <select>
-                                  <option value='${item.id}'>${item.prenomEmploye}</option>
+                                  <option value='${item.id}'>${item.emailEmploye}</option>
                                 </select>
 
                                `;
@@ -367,7 +373,7 @@ include "../config.php";
                                     outputClient += `
 
                                 <select>
-                                  <option value='${item.id}'>${item.prenomClient}</option>
+                                  <option value='${item.id}'>${item.emailClient}</option>
                                </select>
 
                                `;
@@ -402,14 +408,42 @@ include "../config.php";
                     });
                     //view clients for selection endds
 
+                    //view services
+                    $.ajax({
+                        url: baseUrl,
+                        dataType: "json",
+                        type: "POST",
+                        async: true,
+                        data: {endpoint: "/authentication/service_list/33"},
+                        success: function(data) {
+                            console.log(data);
+                            if (data) {
+                                var outputClient = '';
+                                data.forEach(item => {
+                                    outputClient += `
+
+                                <select>
+                                  <option value='${item.ID}'>${item.SERVICE_NAME}</option>
+                               </select>
+
+                               `;
+                                });
+                                $('#service-list').html(outputClient);
+                            } else {
+                                $('#service-list').html("<select><option>No data found</option></select>");
+
+                            }
+
+
+                        },
+                    });
 
                     $('#addjobdata').submit(function(e) {
                         e.preventDefault();
                     }).validate({
                         rules:{
                             nomPrestation:{
-                                required: true,
-                                minlength: 3
+                                required: true
                             },
                             commentaire:{
                                 required: true,
@@ -428,8 +462,7 @@ include "../config.php";
                         },
                         messages:{
                             nomClient: {
-                                required: "Please enter nomPrestation",
-                                minlength: "nomPrestation must be at least 3 characters"
+                                required: "Please enter nomPrestation"
                             },
                             commentaire:{
                                 required: "Please enter commentaire",
@@ -452,7 +485,12 @@ include "../config.php";
                         submitHandler: function (form) { 
                         console.log('add button clicked!')
                         var fd = new FormData(form);
+                        let arrive = fd.get("heureArrivee");
+                        let depart = fd.get("heureDepart");
                         console.log(fd, "i am form data");
+                        fd.set("heureArrivee",new Date(arrive).toISOString());
+                        fd.set("heureDepart",new Date(depart).toISOString());
+
                         fd.append("endpoint","/addPrestation");
                         $.ajax({
                             url: baseUrl,

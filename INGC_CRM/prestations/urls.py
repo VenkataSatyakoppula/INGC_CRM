@@ -10,6 +10,7 @@ urlpatterns = format_suffix_patterns([
     path('client-feedback/<str:pk>/',views.Client_Feedback),
     path('employee-feedback/<str:pk>/',views.Employee_Feedback),
     path('restart-prestation/<str:pk>/',views.Restart_prestation),
+    path('manager-validate/<str:pk>/',views.Manager_validate),
     path('prestationAPI/', views.prestationOverview),
     path('prestationAPI-list/', views.prestationList),
     path('prestationAPI-detail/<str:pk>/', views.prestationDetail),

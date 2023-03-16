@@ -20,14 +20,9 @@ from datetime import datetime
 from .models import Client, Employe, Prestation, NewUser
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.utils.dateparse import parse_datetime
-from django.utils.timezone import is_aware, make_aware
+import pytz
 
-def get_aware_datetime(date_str):
-    ret = parse_datetime(date_str)
-    if not is_aware(ret):
-        ret = make_aware(ret)
-    return ret
+
 
 User = get_user_model()
 
@@ -77,8 +72,9 @@ def prestationDetail(request, pk):
 
 @api_view(['POST'])
 def addPrestation(request):
-    start_date = get_aware_datetime(request.data["heureArrivee"])
-    end_date = get_aware_datetime(request.data["heureDepart"])
+    start_date = request.data["heureArrivee"]
+    end_date = request.data["heureDepart"]
+    print(start_date,end_date)
     newpresatation =  Prestation.objects.create(
             nomPrestation =  request.data["nomPrestation"],
             heureArrivee =  start_date ,
@@ -103,6 +99,11 @@ def UpdatePrestation(request, pk):
     prestations.nomPrestation = request.data["nomPrestation"]
     prestations.heureArrivee = request.data["heureArrivee"]
     prestations.heureDepart = request.data["heureDepart"]
+    if(prestations.ref_employe.id != int(request.data["ref_employe"]) or prestations.ref_client.id != int(request.data["ref_client"])):
+        prestations.status = "Not Started Yet"
+        prestations.checked_in = False
+        prestations.checkin_time = prestations.checkout_time =  None
+    
     prestations.ref_employe = Employe.objects.get( id =  request.data["ref_employe"])
     prestations.ref_client = Client.objects.get( id = request.data["ref_client"])
     prestations.commentaire = request.data["commentaire"]
@@ -126,7 +127,7 @@ def DeletePrestation(request, pk):
 def Employee_checkin(request,pk):
     prestations = Prestation.objects.get(id=pk)
     prestations.checked_in = True
-    prestations.checkin_time = datetime.now().isoformat()
+    prestations.checkin_time = request.data["timestamp"]
     prestations.status = "On-Going"
     prestations.save()
     res= json.dumps({"success":"Employee Checked in Successfully","checkin":prestations.checkin_time,"status":prestations.status})
@@ -137,10 +138,10 @@ def Employee_checkout(request,pk):
     prestations = Prestation.objects.get(id=pk)
     if(prestations.checked_in):
         prestations.checked_in = False
-        prestations.checkout_time = datetime.now().isoformat()
+        prestations.checkout_time = request.data["timestamp"]
         prestations.status = "Pending Validation"
         prestations.save()
-        res= json.dumps({"success":"Employee Checked Out Successfully","checkout":prestations.checkout_time,"status":prestations.status})
+        res= json.dumps({"success":"  Checked Out Successfully","checkout":prestations.checkout_time,"status":prestations.status})
         return Response(res)
     else:
         return Response("Please Check-in First")
@@ -149,10 +150,21 @@ def Employee_checkout(request,pk):
 def Client_Feedback(request,pk):
     prestations = Prestation.objects.get(id=pk)
     prestations.clientcommentaire = request.data["clientcommentaire"]
-    prestations.status = "Validated"
+    prestations.status = "Client Validated"
     prestations.save()
     serializer = prestationSerializer1(prestations)
     return Response(serializer.data)
+
+@api_view(['POST'])
+def Manager_validate(request,pk):
+    prestations = Prestation.objects.get(id=pk)
+    prestations.status = "Validated and Complete"
+    prestations.save()
+    serializer = prestationSerializer1(prestations)
+    return Response(serializer.data)
+
+
+
 
 @api_view(['POST'])
 def Employee_Feedback(request,pk):
@@ -160,7 +172,7 @@ def Employee_Feedback(request,pk):
     if(prestations.checked_in): 
         prestations.commentaire = request.data["commentaire"]
         prestations.checked_in = False
-        prestations.checkout_time = datetime.now().isoformat()
+        prestations.checkout_time = request.data["timestamp"]
         prestations.status = "Pending Validation"
         prestations.save()
         serializer = prestationSerializer1(prestations)

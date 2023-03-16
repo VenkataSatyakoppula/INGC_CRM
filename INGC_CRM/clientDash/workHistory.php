@@ -341,7 +341,7 @@
                     if(status == "Pending Validation"){
                         return `<strong style="color:red">Time out</strong>`
                     }
-                    if(status == "Validated"){
+                    if(status == "Validated and Complete" || status == "Client Validated"){
                         return `<strong style="color:green">${status}</strong>`
                     }
                     if(status == "On-Going"){

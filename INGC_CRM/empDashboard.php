@@ -315,7 +315,7 @@
                     <div class="col-lg-12">
 
                         <h2>Active Jobs | Dashboard</h2>
-
+                        <span class="text-primary"><strong>Tip: Please refresh The page Before Check-in and Check out!!</strong></span>
                         <div class="card">
                             <div class="card-body">
                                 <div class="active-member">
@@ -337,6 +337,7 @@
                                                     <th>ACTION</th>
                                                 </tr>
                                             </thead>
+
 
                                             <tbody id="empJobDetails">
                                                 
@@ -368,10 +369,14 @@
                                                 </tr> -->
                                             </tbody>
                                         </table>
+                                        
                                     </div>
+                                   
                                 </div>
+                                
                             </div>
                         </div>
+                        
 
                     </div>
                 </div>
@@ -470,11 +475,13 @@
 
     function action(user_id,check_out_time,status,flag) { 
         
-        if(status == "Pending Validation" || status == "Validated"){
+        if(status == "Pending Validation" || status == "Validated and Complete" || status == "Client Validated"){
             if(flag == "status" && status == "Pending Validation"){
                 return `<strong style="color:blue">${status}</strong>`
-            }else if(flag == "status" && status == "Validated"){
+            }else if(flag == "status" && status == "Validated and Complete"){
                 return `<strong style="color:green">${status}</strong>`
+            }else if(flag == "status" && status == "Client Validated"){
+                return `<strong style="color:#FF5733">${status}</strong>`
             }else{
                 var checkout = new Date(check_out_time);
                 return "<p style='color:red'>Checked out at: <strong>"+checkout.toLocaleString()+"</strong></p>";
@@ -495,17 +502,25 @@
             }
             return `<button class="btn btn-primary checkin" data-id=${user_id}>CHECK IN</button>`
         }
+        else if(status == "Client Validated"){
+            if(flag == "status"){
+                return `<strong style="color:#FF5733">${status}</strong>`
+            }else{
+                return 
+            }
+        }
     } 
 
     $(document).on('click',".checkin",function(){
         console.log("checkin clicked");
+        let times = new Date();
         let id = $(this).attr("data-id");
         $.ajax({
         url: baseUrl,
         dataType: "json",
         type: "POST",
         async: true,
-        data: { endpoint:"/check-in/", id: id  },
+        data: { endpoint:"/check-in/", id: id,timestamp: times.toISOString()},
         success: function (data) {
            console.log(data);
             if (data){
@@ -529,9 +544,11 @@
     $("#employee-feedback").submit(function (e) { 
         e.preventDefault()
         var fd = new FormData(this);
+        let times = new Date();
         let id = $("#btncheckoutYes").attr("data-id");
         fd.append("endpoint","/employee-feedback/");
         fd.append("id",id);
+        fd.append("timestamp",times.toISOString());
 
         $.ajax({
             url: baseUrl,

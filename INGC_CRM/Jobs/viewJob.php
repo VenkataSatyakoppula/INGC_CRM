@@ -178,7 +178,8 @@ include "../config.php";
         <div class="content-body" style="min-height: 876px;">
 
             <div class="container-fluid mt-3 job-data">
-
+            <span class="text-primary"><strong>Tip: Please refresh The page to check The latest Status!!
+                        </strong></span>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card ">
@@ -200,10 +201,7 @@ include "../config.php";
                                                     <th>CURRENT STATUS</th>
                                                     <th>MODIFY</th>
                                                     <th>DELETE</th>
-                                                    <th>RESET</th>
-                                                   
-
-
+                                                    <th>ACTION</th>
 
                                                 </tr>
                                             </thead>
@@ -277,6 +275,67 @@ include "../config.php";
             </div>
         </div>
 
+        <div id="ValidateModal" class="modal fade">
+            <div class="modal-dialog modal-confirm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="icon-box">
+                            <i class="material-icons">&#xE5CD;</i>
+                        </div>
+                        <h4 class="modal-title">Are you sure?</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Do you really want to Validate the JOB?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-success" data-id="" id="btnValidateYes">VALIDATE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="ValidateModalWarning" class="modal fade">
+            <div class="modal-dialog modal-confirm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="icon-box">
+                            <i class="material-icons">&#xE5CD;</i>
+                        </div>
+                        <h4 class="modal-title">Cannot Validate YET!</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Can validate perstation only if status becomes "Client Validated"</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="ValidateModalDone" class="modal fade">
+            <div class="modal-dialog modal-confirm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="icon-box">
+                            <i class="material-icons">&#xE5CD;</i>
+                        </div>
+                        <h4 class="modal-title">Already Validated!!</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>This Prestation is Already validated</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- delete modal data ends-->
 
 
@@ -322,7 +381,7 @@ include "../config.php";
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">Start Time</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" placeholder="Enter The Start Time" name="heureArrivee">
+                                            <input type="datetime-local" class="form-control" placeholder="Enter The Start Time" name="heureArrivee">
                                         </div>
                                     </div>
 
@@ -330,7 +389,7 @@ include "../config.php";
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">End Time</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" placeholder="Enter The End Time" name="heureDepart">
+                                            <input type="datetime-local" class="form-control" placeholder="Enter The End Time" name="heureDepart">
                                         </div>
                                     </div>
 
@@ -528,7 +587,9 @@ include "../config.php";
                                             
                                             <td id = "${item.id}"><button type="button" class="btn btn-primary btnupdate updatejobdata" update-id = "${item.id}" >UPDATE</button></td> 
                                             <td id = "${item.id}"><button type="button" class="btn btn-danger btndelete deletejobdata"  data-id = "${item.id}">DELETE</button></td> 
-                                            <td id = "${item.id}"><button type="button" class="btn btn-warning restartjob"  data-id = "${item.id}">RESET</button></td>
+                                            <td id = "${item.id}"><button type="button" class="btn btn-warning restartjob"  data-id = "${item.id}">RESET</button> <button type="button" class="my-2 btn btn-success validatejob" data-status= "${item.status}"  data-id = "${item.id}">VALIDATE</button>
+                                            </td>
+
 
 
                                         </tr>
@@ -553,8 +614,8 @@ include "../config.php";
                     if(status == "Pending Validation"){
                         return `<strong style="color:blue">${status}</strong>`
                     }
-                    if(status == "Validated"){
-                        return `<strong style="color:green">${status}</strong>`
+                    if(status == "Client Validated"){
+                        return `<strong style="color:#FF5733">${status}</strong>`
                     }
                     if(status == "On-Going"){
                         return `<strong style="color:#8B8000">${status}</strong>`
@@ -564,6 +625,9 @@ include "../config.php";
                     }
                     if(status == "Disputed"){
                         return `<strong style="color:red">${status}</strong>`
+                    }
+                    if(status == "Validated and Complete"){
+                        return `<strong style="color:green">${status}</strong>`
                     }
 
                 }
@@ -593,15 +657,43 @@ include "../config.php";
                         },
                         success: function(data) {
                             console.log(data, "i am the data after update ajax call is completed");
-                            
+                            heureArrivee = new Date(data.heureArrivee);
+                            heureDepart = new Date(data.heureDepart);
+                            let secstr = heureArrivee.getHours();
+                            let minstr = heureArrivee.getMinutes();
+                            let monstr = heureArrivee.getMonth();
+                            let secstr2 = heureDepart.getHours();
+                            let minstr2 = heureDepart.getMinutes();
+                            let monstr2 = heureDepart.getMonth();
+
+                            if(heureArrivee.getHours() < 10 ){
+                                secstr = "0"+heureArrivee.getHours();
+                            }
+                            if(heureDepart.getHours() < 10 ){
+                                secstr2 = "0"+heureDepart.getHours();
+                            }
+                            if(heureArrivee.getMonth() < 10 ){
+                                monstr = "0"+(heureArrivee.getMonth()+1);
+                            }
+                            if(heureDepart.getMonth() < 10 ){
+                                monstr2 = "0"+(heureDepart.getMonth()+1);
+                            }
+                            if(heureArrivee.getMinutes() < 10){
+                                minstr = "0"+heureArrivee.getMinutes();
+                            }
+                            if(heureDepart.getMinutes() < 10){
+                                minstr2 = "0"+heureDepart.getMinutes();
+                            }
+                            arrivestr = `${heureArrivee.getFullYear()}-${monstr}-${heureArrivee.getDate()}T${secstr}:${minstr}`;
+                            departstr = `${heureArrivee.getFullYear()}-${monstr2}-${heureArrivee.getDate()}T${secstr2}:${minstr2}`
+                            console.log(departstr)
                             $("#employee-list-for-update option[value ='" + data.ref_employe + "']").attr("selected", 'selected');
                             $("#client-list-for-update option[value ='" + data.ref_client + "']").attr("selected", 'selected');
-
                             $('input[name="nomPrestation"]').val(data.nomPrestation);
-                            $('input[name="heureArrivee"]').val(data.heureArrivee);
-                            $('input[name="heureDepart"]').val(data.heureDepart);
+                            $('input[name="heureArrivee"]').val(arrivestr);
+                            $('input[name="heureDepart"]').val(departstr);
                             $('input[name="commentaire"]').val(data.commentaire);
-                            $('input[name="remarque_client"]').val(data.clientcommentaire)
+                            $('input[name="remarque_client"]').val(data.clientcommentaire);
                             $('input[name="statut"]').val(data.status);
                         },
 
@@ -645,7 +737,10 @@ include "../config.php";
                     console.log(uid , "am i working uid even");
                     fd.append("endpoint","/updatePrestation");
                     fd.append("id",uid);
-                    
+                    let arrive = fd.get("heureArrivee");
+                    let depart = fd.get("heureDepart");
+                    fd.set("heureArrivee",new Date(arrive).toISOString());
+                    fd.set("heureDepart",new Date(depart).toISOString());
                     $.ajax({
                         url: baseUrl,
                         dataType: "json",
@@ -694,6 +789,7 @@ include "../config.php";
                 //restart job
                 $(document).on('click', '.restartjob', function() {
                     var reid = $(this).attr('data-id');
+                    
                     $('#btnRestartYes').attr('data-id', reid)
                     $('#RestartModal').modal('show');
                 });
@@ -716,6 +812,47 @@ include "../config.php";
                     });
 
                 });
+
+                //validate JOB
+                $(document).on('click', '.validatejob', function() {
+                    let id = $(this).attr('data-id');
+                    let status  = $(this).attr('data-status');
+                    if(status != "Client Validated"){
+                        if(status == "Validated and Complete"){
+                            $('#ValidateModalDone').modal('show');
+                        }else{   
+                        $('#ValidateModalWarning').modal('show');
+                        }
+                    } 
+                    else{
+                        $('#btnValidateYes').attr('data-id', id)
+                        $('#ValidateModal').modal('show');
+                    }
+
+                });
+
+                $(document).on('click', '#btnValidateYes', function() {
+                    let id = $(this).attr('data-id');
+                    $('#ValidateModal').modal('hide');
+                    $.ajax({
+                        url: baseUrl,
+                        dataType: "json",
+                        type: 'POST',
+                        async: true,
+                        data:{endpoint:"/manager-validate/",id:id},
+                        success: function(data) {
+                            $('#timeoutmsg').html("Validated Successfully");
+                            setTimeout(() => {
+                                $('#timeoutmsg').html("");
+                                window.location.reload();
+                            }, 500)
+                        },
+                    });
+
+                });
+
+                
+
 
                 //open modal for delete 
                 $(document).on('click', '.deletejobdata', function() {

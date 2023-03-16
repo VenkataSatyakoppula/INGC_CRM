@@ -230,6 +230,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $response = api_call($_POST,$url,'POST');
             echo $response;
             break;
+        case '/manager-validate/':
+            $url = $endp.$_POST["id"]."/";
+            $response = api_call($_POST,$url,'POST');
+            echo $response;
+            break;
+        case '/authentication/service_list/33':
+            $url = $endp;
+            $response = api_call($_POST,$url,'GET');
+            echo $response;
+            break;
         default:
             # code...
             break;

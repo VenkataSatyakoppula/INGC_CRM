@@ -298,7 +298,7 @@ include "../config.php";
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">Start Time</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" placeholder="Enter The Start Time" name="heureArrivee">
+                                            <input type="datetime-local" class="form-control" placeholder="Enter The Start Time" name="heureArrivee">
                                         </div>
                                     </div>
 
@@ -306,7 +306,7 @@ include "../config.php";
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">End Time</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" placeholder="Enter The End Time" name="heureDepart">
+                                            <input type="datetime-local" class="form-control" placeholder="Enter The End Time" name="heureDepart">
                                         </div>
                                     </div>
 
@@ -556,7 +556,7 @@ include "../config.php";
                     if(status == "Pending Validation"){
                         return `<strong style="color:red">Time out</strong>`
                     }
-                    if(status == "Validated"){
+                    if(status == "Validated and Complete" || status == "Client Validated"){
                         return `<strong style="color:green">${status}</strong>`
                     }
                     if(status == "On-Going"){
@@ -564,9 +564,7 @@ include "../config.php";
                     }
                     if(status == "Not Started Yet" || status == "Disputed"){
                         return `<strong style="color:red">Abandoned</strong>`
-
                     }
-
                 }
 
                 //open modal for update 
@@ -595,13 +593,42 @@ include "../config.php";
                         },
                         success: function(data) {
                             console.log(data, "i am the data after update ajax call is completed");
-                            
+                            heureArrivee = new Date(data.heureArrivee);
+                            heureDepart = new Date(data.heureDepart);
+                            let secstr = heureArrivee.getHours();
+                            let minstr = heureArrivee.getMinutes();
+                            let monstr = heureArrivee.getMonth();
+                            let secstr2 = heureDepart.getHours();
+                            let minstr2 = heureDepart.getMinutes();
+                            let monstr2 = heureDepart.getMonth();
+
+                            if(heureArrivee.getHours() < 10 ){
+                                secstr = "0"+heureArrivee.getHours();
+                            }
+                            if(heureDepart.getHours() < 10 ){
+                                secstr2 = "0"+heureDepart.getHours();
+                            }
+                            if(heureArrivee.getMonth() < 10 ){
+                                monstr = "0"+(heureArrivee.getMonth()+1);
+                            }
+                            if(heureDepart.getMonth() < 10 ){
+                                monstr2 = "0"+(heureDepart.getMonth()+1);
+                            }
+                            if(heureArrivee.getMinutes() < 10){
+                                minstr = "0"+heureArrivee.getMinutes();
+                            }
+                            if(heureDepart.getMinutes() < 10){
+                                minstr2 = "0"+heureDepart.getMinutes();
+                            }
+                            arrivestr = `${heureArrivee.getFullYear()}-${monstr}-${heureArrivee.getDate()}T${secstr}:${minstr}`;
+                            departstr = `${heureArrivee.getFullYear()}-${monstr2}-${heureArrivee.getDate()}T${secstr2}:${minstr2}`
+                            console.log(arrivestr)
                             $("#employee-list-for-update option[value ='" + data.ref_employe + "']").attr("selected", 'selected');
                             $("#client-list-for-update option[value ='" + data.ref_client + "']").attr("selected", 'selected');
 
                             $('input[name="nomPrestation"]').val(data.nomPrestation);
-                            $('input[name="heureArrivee"]').val(data.heureArrivee);
-                            $('input[name="heureDepart"]').val(data.heureDepart);
+                            $('input[name="heureArrivee"]').val(arrivestr);
+                            $('input[name="heureDepart"]').val(departstr);
                             $('input[name="commentaire"]').val(data.commentaire);
                             $('input[name="remarque_client"]').val(data.clientcommentaire)
                             $('input[name="statut"]').val(data.status);
@@ -651,6 +678,10 @@ include "../config.php";
                     console.log(uid , "am i working uid even");
                     fd.append("endpoint","/updatePrestation");
                     fd.append("id",uid);
+                    let arrive = fd.get("heureArrivee");
+                    let depart = fd.get("heureDepart");
+                    fd.set("heureArrivee",new Date(arrive).toISOString());
+                    fd.set("heureDepart",new Date(depart).toISOString());
                     $.ajax({
                         url: baseUrl,
                         dataType: "json",

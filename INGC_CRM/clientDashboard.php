@@ -362,7 +362,8 @@
                     <div class="col-lg-12">
 
                         <h2>Prestation en cours</h2>
-
+                        <span class="text-primary"><strong>Tip: Please refresh The page to check The latest Status!!
+                        </strong></span>
                         <div class="card">
                             <div class="card-body">
                                 <div class="active-member">
@@ -560,14 +561,22 @@ else{
                 let check_in = new Date(checkin)
                 return `<strong>Employee Checked in at: ${check_in.toLocaleString()}</strong>`
             }
-        }else if(status == "Validated"){
+        }else if(status == "Validated and Complete"){
             $("#status"+user_id).text(status).css("color","green")
             if(flag == "status"){
                 return `<strong style="color:green">${status}</strong>`
             }else{
                 return `<button class="btn btn-warning validate" data-id=${user_id}>Edit</button>`
             }
+        }else if(status == "Client Validated"){
+            $("#status"+user_id).text(status).css("color","green")
+            if(flag == "status"){
+                return `<strong style="color:#FF5733">${status}</strong>`
+            }else{
+                return `<button class="btn btn-warning validate" data-id=${user_id}>Edit</button>`
+            }
         }
+
     }
 
     $(document).on('click',".validate",function(){
