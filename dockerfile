@@ -21,7 +21,7 @@ RUN apk add --no-cache \
 RUN pip install -r requirements.txt 
 USER nobody
 
-EXPOSE 80
+EXPOSE 8080
 EXPOSE 8000
 #ENTRYPOINT ["python3"]
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

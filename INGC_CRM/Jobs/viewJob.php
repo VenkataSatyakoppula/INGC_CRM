@@ -192,8 +192,8 @@ include "../config.php";
                                             <thead>
                                                 <tr>
                                                     <th> JOB NAME</th>
-                                                    <th>EMPLOYEE NAME</th>
-                                                    <th>CLIENT NAME</th>
+                                                    <th>EMPLOYEE EMAIL</th>
+                                                    <th>CLIENT EMAIL</th>
                                                     <th>START TIME</th>
                                                     <th>END TIME</th>
                                                     <th>EMPLOYEE FEEDBACK</th>
@@ -363,7 +363,7 @@ include "../config.php";
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Employee Name</label>
+                                        <label class="col-sm-2 col-form-label">Employee Email</label>
                                         <div class="col-sm-10">
                                             <select id="employee-list-for-update" class="form-control" name="ref_employe">
                                             </select>
@@ -371,7 +371,7 @@ include "../config.php";
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Client Name</label>
+                                        <label class="col-sm-2 col-form-label">Client Email</label>
                                         <div class="col-sm-10">
                                             <select id="client-list-for-update" class="form-control" name="ref_client">
                                             </select>
@@ -474,7 +474,7 @@ include "../config.php";
                                 data.forEach(item => {
                                     output += `
                                                                      
-                                                   <option value = "${item.id}"  >${item.prenomEmploye}</option>
+                                                   <option value = "${item.id}"  >${item.emailEmploye}</option>
                            
                     `;
                                 });
@@ -525,7 +525,7 @@ include "../config.php";
                                 data.forEach(item => {
                                     output += `                    
                                                   
-                                                   <option value = "${item.id}"  >${item.prenomClient}</option>
+                                                   <option value = "${item.id}"  >${item.emailClient}</option>
                                                                                                        
                     `;
                                 });
@@ -577,8 +577,8 @@ include "../config.php";
                                     output += `
                                         <tr>
                                             <td>${item.nomPrestation}</td>
-                                            <td>${item.ref_employe.prenomEmploye}</td>
-                                            <td>${item.ref_client.prenomClient}</td>
+                                            <td>${item.ref_employe.emailEmploye}</td>
+                                            <td>${item.ref_client.emailClient}</td>
                                             <td>${start_time.toLocaleString()}</td>
                                             <td>${end_date_time.toLocaleString()}</td>
                                             <td>${item.commentaire}</td>

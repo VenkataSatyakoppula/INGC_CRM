@@ -423,7 +423,7 @@ include "../config.php";
                                     outputClient += `
 
                                 <select>
-                                  <option value='${item.ID}'>${item.SERVICE_NAME}</option>
+                                  <option value='${item.SERVICE_NAME}'>${item.SERVICE_NAME}</option>
                                </select>
 
                                `;

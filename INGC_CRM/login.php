@@ -16,6 +16,7 @@
 
 
 <div class="w-50 col-lg-12 mx-auto mt-5">
+    <h2 class="text-center text-primary">Login Portal</h2>
                         <div class="card">
                             <div class="card-body">
                                 <!-- <div class="d-flex justify-content-between"> -->
