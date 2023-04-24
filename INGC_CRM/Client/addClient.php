@@ -96,7 +96,7 @@
                                     <div class="dropdown-content-body">
                                         <ul>
                                             <li><span>Se connecter en tant que <?php echo $_SESSION["user"]; ?> </span></li>
-                                            <li><a href="../logout.php"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                            <li><a href="../logout.php"><i class="icon-key"></i> <span>Déconnexion</span></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -131,7 +131,7 @@
 
                         <li class="">
                             <a class="has-arrow" href="../Jobs/viewJob.php" aria-expanded="false">
-                                <i class="fa fa-tasks"></i><span class="nav-text">Prestations</span>
+                                <i class="fa fa-tasks"></i><span class="nav-text">Prestation</span>
                             </a>
 
                         </li>
@@ -158,7 +158,7 @@
                         <?php  if ($_SESSION['role']==4 ){?>
                         <li class="">
                             <a class="has-arrow" href="../Managers/viewManagers.php" aria-expanded="false">
-                                <i class="fa fa-users"></i><span class="nav-text">Managers</span>
+                                <i class="fa fa-users"></i><span class="nav-text">Manager</span>
                             </a>
                         </li>
                          <?php }?>  
@@ -247,7 +247,7 @@
 
                                         <button type="submit" class="btn btn-dark" id="add-data">AJOUTER </button>
 
-                                        <a href="./viewClient.php"><button type="button" class="btn btn-info">VOIR CLIENTS</button></a>
+                                        <a href="./viewClient.php"><button type="button" class="btn btn-info">VOIR LES CLIENTS</button></a>
 
                                     </div>
 

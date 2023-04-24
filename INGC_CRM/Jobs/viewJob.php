@@ -9,7 +9,7 @@ include "../config.php";
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Jobs</title>
+    <title>Prestations</title>
     <!-- Pignose Calender -->
     <link href="../plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
     <!-- Chartist -->
@@ -95,8 +95,8 @@ include "../config.php";
                                 <div class="drop-down dropdown-profile animated fadeIn dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(5px, 57px, 0px);">
                                     <div class="dropdown-content-body">
                                         <ul>
-                                            <li><span>Logged in as <?php echo $_SESSION["user"]; ?> </span></li>
-                                            <li><a href="../logout.php"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                            <li><span>Connecté en tant que <?php echo $_SESSION["user"]; ?> </span></li>
+                                            <li><a href="../logout.php"><i class="icon-key"></i> <span>Déconnexion</span></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -117,26 +117,26 @@ include "../config.php";
             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
                 <div class="nk-nav-scroll active" style="overflow: hidden; width: auto; height: 100%;">
                     <ul class="metismenu in" id="menu">
-                        <li class="nav-label">Dashboard</li>
+                        <li class="nav-label">Tableau de bord</li>
                         <li class="">
                             <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+                                <i class="icon-speedometer menu-icon"></i><span class="nav-text">Tableau de bord</span>
                             </a>
                             <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                                <li class="active"><a href="../<?php echo $redir; ?>" class="active">Home 1</a></li>
+                                <li class="active"><a href="../<?php echo $redir; ?>" class="active">Acceuil 1</a></li>
                             </ul>
                         </li>
 
                         <li class="">
                             <a class="has-arrow" href="../Jobs/viewJob.php" aria-expanded="false">
-                                <i class="fa fa-tasks"></i><span class="nav-text">Jobs</span>
+                                <i class="fa fa-tasks"></i><span class="nav-text">Prestation</span>
                             </a>
 
                         </li>
 
                         <li class="">
                             <a class="has-arrow" href="../Jobs/jobhistory.php" aria-expanded="false">
-                                <i class="fa fa-history"></i><span class="nav-text">Jobs History</span>
+                                <i class="fa fa-history"></i><span class="nav-text">Historique des prestations</span>
                             </a>
                         </li>
 
@@ -149,14 +149,14 @@ include "../config.php";
 
                         <li class="">
                             <a class="has-arrow" href="../Employee/viewEmp.php" aria-expanded="false">
-                                <i class="fa fa-users"></i><span class="nav-text">Employee</span>
+                                <i class="fa fa-users"></i><span class="nav-text">Employé</span>
                             </a>
 
                         </li>
                         <?php  if ($_SESSION['role']==4 ){?>
                         <li class="">
                             <a class="has-arrow" href="../Managers/viewManagers.php" aria-expanded="false">
-                                <i class="fa fa-users"></i><span class="nav-text">Managers</span>
+                                <i class="fa fa-users"></i><span class="nav-text">Manager</span>
                             </a>
                         </li>
                          <?php }?>  
@@ -191,16 +191,16 @@ include "../config.php";
                                         <table class="table table-xs mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th> JOB NAME</th>
-                                                    <th>EMPLOYEE EMAIL</th>
-                                                    <th>CLIENT EMAIL</th>
-                                                    <th>START TIME</th>
-                                                    <th>END TIME</th>
-                                                    <th>EMPLOYEE FEEDBACK</th>
-                                                    <th>CLIENT FEEDBACK</th>
-                                                    <th>CURRENT STATUS</th>
-                                                    <th>MODIFY</th>
-                                                    <th>DELETE</th>
+                                                    <th>NOM DE LA PRESTATION</th>
+                                                    <th>EMAIL EMPLOYE</th>
+                                                    <th>EMAIL CLIENT</th>
+                                                    <th>HEURE DE DEBUT</th>
+                                                    <th>HEURE DE FIN</th>
+                                                    <th>FEEDBACK EMPLOYE</th>
+                                                    <th>FEEDBACK CLIENT</th>
+                                                    <th>STATUT</th>
+                                                    <th>MODIFIER</th>
+                                                    <th>SUPPRIMER</th>
                                                     <th>ACTION</th>
 
                                                 </tr>
@@ -213,7 +213,7 @@ include "../config.php";
                                         </table>
 
                                         <a href="./addJob.php">
-                                            <button type="button" class="btn btn-primary">ADD JOB</button>
+                                            <button type="button" class="btn btn-primary">AJOUTER UNE PRESTATION</button>
                                         </a>
                                     </div>
                                     <div id="timeoutmsg"></div>
@@ -240,15 +240,15 @@ include "../config.php";
                         <div class="icon-box">
                             <i class="material-icons">&#xE5CD;</i>
                         </div>
-                        <h4 class="modal-title">Are you sure?</h4>
+                        <h4 class="modal-title">Êtes-vous sûr ?</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <p>Do you really want to delete these records? This process cannot be undone.</p>
+                        <p>Voulez-vous vraiment supprimer cet enregistrement ? Ce processus ne peut pas être annulé.</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-danger" data-id="" id="btnDelteYes">Delete</button>
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-danger" data-id="" id="btnDelteYes">Supprimer</button>
                     </div>
                 </div>
             </div>
@@ -261,15 +261,15 @@ include "../config.php";
                         <div class="icon-box">
                             <i class="material-icons">&#xE5CD;</i>
                         </div>
-                        <h4 class="modal-title">Are you sure?</h4>
+                        <h4 class="modal-title">Êtes-vous sûr ?</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <p>Do you really want to Restart the JOB?</p>
+                        <p>Voulez-vous vraiment redémarrer la prestation ?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-warning" data-id="" id="btnRestartYes">RESTART</button>
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-warning" data-id="" id="btnRestartYes">Redémarrer</button>
                     </div>
                 </div>
             </div>
@@ -282,15 +282,15 @@ include "../config.php";
                         <div class="icon-box">
                             <i class="material-icons">&#xE5CD;</i>
                         </div>
-                        <h4 class="modal-title">Are you sure?</h4>
+                        <h4 class="modal-title">Êtes-vous sûr ?</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <p>Do you really want to Validate the JOB?</p>
+                        <p>Voulez-vous vraiment valider la prestation ?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-success" data-id="" id="btnValidateYes">VALIDATE</button>
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-success" data-id="" id="btnValidateYes">Valider</button>
                     </div>
                 </div>
             </div>
@@ -303,14 +303,14 @@ include "../config.php";
                         <div class="icon-box">
                             <i class="material-icons">&#xE5CD;</i>
                         </div>
-                        <h4 class="modal-title">Cannot Validate YET!</h4>
+                        <h4 class="modal-title">Vous ne pouvez pas encore valider !</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <p>Can validate perstation only if status becomes "Client Validated"</p>
+                        <p>La prestation ne peux être validée uniquement si le statut devient "Client Validé"</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-info" data-dismiss="modal">close</button>
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Fermer</button>
                     </div>
                 </div>
             </div>
@@ -323,11 +323,11 @@ include "../config.php";
                         <div class="icon-box">
                             <i class="material-icons">&#xE5CD;</i>
                         </div>
-                        <h4 class="modal-title">Already Validated!!</h4>
+                        <h4 class="modal-title">Déja valider!!</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <p>This Prestation is Already validated</p>
+                        <p>Cette prestation a déjà été validée</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-info" data-dismiss="modal">close</button>
@@ -347,7 +347,7 @@ include "../config.php";
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel">Update</h4>
+                        <h4 class="modal-title" id="myModalLabel">Modifier</h4>
                     </div>
 
                     <div class="modal-body">
@@ -356,14 +356,14 @@ include "../config.php";
                                 <div class="modal-update-body">
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Job Name</label>
+                                        <label class="col-sm-2 col-form-label">Nom de la prestation</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" placeholder="Job Name" name="nomPrestation">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Employee Email</label>
+                                        <label class="col-sm-2 col-form-label">Email de l'employé</label>
                                         <div class="col-sm-10">
                                             <select id="employee-list-for-update" class="form-control" name="ref_employe">
                                             </select>
@@ -371,7 +371,7 @@ include "../config.php";
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Client Email</label>
+                                        <label class="col-sm-2 col-form-label">Email du client</label>
                                         <div class="col-sm-10">
                                             <select id="client-list-for-update" class="form-control" name="ref_client">
                                             </select>
@@ -379,7 +379,7 @@ include "../config.php";
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Start Time</label>
+                                        <label class="col-sm-2 col-form-label">Heure de début</label>
                                         <div class="col-sm-10">
                                             <input type="datetime-local" class="form-control" placeholder="Enter The Start Time" name="heureArrivee">
                                         </div>
@@ -387,21 +387,21 @@ include "../config.php";
 
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">End Time</label>
+                                        <label class="col-sm-2 col-form-label">Heure de fin</label>
                                         <div class="col-sm-10">
                                             <input type="datetime-local" class="form-control" placeholder="Enter The End Time" name="heureDepart">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Employee Feedback</label>
+                                        <label class="col-sm-2 col-form-label">Feedback de l'employé</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" placeholder="Employee Feedback" name="commentaire">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Client Feedback</label>
+                                        <label class="col-sm-2 col-form-label">Feedback du client</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" placeholder="Client Feedback" name="remarque_client">
                                         </div>

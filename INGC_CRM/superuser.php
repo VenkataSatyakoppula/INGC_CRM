@@ -182,7 +182,7 @@
                         <li class="icons dropdown"><a href="add.php" data-toggle="dropdown">
                             </a>
                             <div class="addservice"><a href="add.php" data-toggle="dropdown">
-                                </a><a href="add.php">Add Services</a>
+                                </a><a href="add.php">Ajouter une prestation</a>
 
                             </div>
 
@@ -304,7 +304,7 @@
 
                         <li class="">
                             <a class="has-arrow" href="./Client/viewClient.php" aria-expanded="false">
-                                <i class="fa fa-user"></i><span class="nav-text">Clients</span>
+                                <i class="fa fa-user"></i><span class="nav-text">Client</span>
                             </a>
                             <!-- <ul aria-expanded="false" class="collapse" style="height: 0px;"> -->
                                 <!-- <li class="active"><a href="./Client/addClient.php" class="active">Add Client </a></li> -->
@@ -314,7 +314,7 @@
 
                         <li class="">
                             <a class="has-arrow" href="./Employee/viewEmp.php" aria-expanded="false">
-                                <i class="fa fa-users"></i><span class="nav-text">Employés</span>
+                                <i class="fa fa-users"></i><span class="nav-text">Employé</span>
                             </a>
                             <!-- <ul aria-expanded="false" class="collapse" style="height: 0px;"> -->
                                 <!-- <li class="active"><a href="./Employee/addEmp.php" class="active">Add Employee </a></li>       -->
@@ -324,7 +324,7 @@
 
                         <li class="">
                             <a class="has-arrow" href="./Managers/viewManagers.php" aria-expanded="false">
-                                <i class="fa fa-users"></i><span class="nav-text">Managers</span>
+                                <i class="fa fa-users"></i><span class="nav-text">Manager</span>
                             </a>
                         </li>
 
@@ -424,7 +424,7 @@
         <div class="content-body" style="min-height: 876px;">
 
             <div class="container-fluid mt-3">
-                <h1>Hello,  <?php echo $_SESSION['name']; ?>!</h1>
+                <h1>Bonjour,  <?php echo $_SESSION['name']; ?>!</h1>
 
                 <div class="row">
                     <div class="col-lg-12">
@@ -437,12 +437,12 @@
                                         <table class="table table-xs mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th>NAME</th>
-                                                    <th>SERVICE</th>
-                                                    <th>START TIME</th>
-                                                    <th>END TIME</th>
-                                                    <th>MODIFY</th>
-                                                    <th>DELETE</th>
+                                                    <th>NOM</th>
+                                                    <th>PRESTATION</th>
+                                                    <th>HEURE DEBUT</th>
+                                                    <th>HEURE FIN</th>
+                                                    <th>MODIFIER</th>
+                                                    <th>SUPPRIMER</th>
                                                 </tr>
                                             </thead>
 
@@ -469,17 +469,17 @@
                                                         <!-- <td class="td"><button class="updatebutton" id="udpatebutton">UPDATE</button></td> -->
                                                         <?php if($get_data[$i]->empid == $_SESSION["id"]) {?>
                                                         <td>
-                                                            <div class="viewlinkupdate"><a class="updatelink" href="update.php?empid=<?php echo $_SESSION['id'] ?>&id=<?php echo $get_data[$i]->ID ?>&servicename=<?php echo $get_data[$i]->SERVICE_NAME ?>&starttime=<?php echo $get_data[$i]->START_TIME ?>&endtime=<?php echo $get_data[$i]->END_TIME; ?>">UPDATE</a></div>
+                                                            <div class="viewlinkupdate"><a class="updatelink" href="update.php?empid=<?php echo $_SESSION['id'] ?>&id=<?php echo $get_data[$i]->ID ?>&servicename=<?php echo $get_data[$i]->SERVICE_NAME ?>&starttime=<?php echo $get_data[$i]->START_TIME ?>&endtime=<?php echo $get_data[$i]->END_TIME; ?>">MODIFIER</a></div>
                                                         </td>
                                                         <td>
-                                                            <div class="viewlinkdelete"><a href="delete.php?eid=<?php echo  $_SESSION['id'] ?>&id=<?php echo $get_data[$i]->ID; ?>">DELETE</a></div>
+                                                            <div class="viewlinkdelete"><a href="delete.php?eid=<?php echo  $_SESSION['id'] ?>&id=<?php echo $get_data[$i]->ID; ?>">SUPPRIMER</a></div>
                                                         </td>
                                                         <?php }else{?>
                                                             <td>
-                                                            <strong>Update Not Allowed!</strong>
+                                                            <strong> Modification pas autorisée!</strong>
                                                         </td>
                                                         <td>
-                                                        <strong> Delete Not Allowed!</strong>
+                                                        <strong> Suppression pas autorisée!</strong>
                                                         </td>
                                                             <?php }?>
                                                     </tr>

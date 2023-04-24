@@ -12,7 +12,7 @@ include "../config.php";
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add job</title>
+    <title>Ajouter une prestation</title>
     <!-- Pignose Calender -->
     <link href="../plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
     <!-- Chartist -->
@@ -123,25 +123,25 @@ include "../config.php";
             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
                 <div class="nk-nav-scroll active" style="overflow: hidden; width: auto; height: 100%;">
                     <ul class="metismenu in" id="menu">
-                        <li class="nav-label">Dashboard</li>
+                        <li class="nav-label">Tableau de bord</li>
                         <li class="">
                             <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+                                <i class="icon-speedometer menu-icon"></i><span class="nav-text">Tableau de bord</span>
                             </a>
                             <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                                <li class="active"><a href="../<?php echo $redir; ?>" class="active">Home 1</a></li>
+                                <li class="active"><a href="../<?php echo $redir; ?>" class="active">Acceuil 1</a></li>
                             </ul>
                         </li>
 
                         <li class="">
                             <a class="has-arrow" href="../Jobs/viewJob.php" aria-expanded="false">
-                                <i class="fa fa-tasks"></i><span class="nav-text">Jobs</span>
+                                <i class="fa fa-tasks"></i><span class="nav-text">Prestation</span>
                             </a>
 
                         </li>
                         <li class="">
                             <a class="has-arrow" href="../Jobs/jobhistory.php" aria-expanded="false">
-                                <i class="fa fa-history"></i><span class="nav-text">Jobs History</span>
+                                <i class="fa fa-history"></i><span class="nav-text">Historique des prestations</span>
                             </a>
                         </li>
 
@@ -154,14 +154,14 @@ include "../config.php";
 
                         <li class="">
                             <a class="has-arrow" href="../Employee/viewEmp.php" aria-expanded="false">
-                                <i class="fa fa-users"></i><span class="nav-text">Employee</span>
+                                <i class="fa fa-users"></i><span class="nav-text">Employé</span>
                             </a>
 
                         </li>
                         <?php  if ($_SESSION['role']==4 ){?>
                         <li class="">
                             <a class="has-arrow" href="../Managers/viewManagers.php" aria-expanded="false">
-                                <i class="fa fa-users"></i><span class="nav-text">Managers</span>
+                                <i class="fa fa-users"></i><span class="nav-text">Manager</span>
                             </a>
                         </li>
                          <?php }?>  
@@ -184,16 +184,16 @@ include "../config.php";
             <div class="container-fluid mt-3">
 
                 <div class="w-75 col-lg-12 mx-auto mt-5">
-                <span class="text-primary"><strong>Tip: Add new services and select here!!
+                <span class="text-primary"><strong>Astuce : Ajoutez de nouveaux services et sélectionnez ici !!
                         </strong></span> 
                     <div class="card">
 
                         <div class="card-body">
-                            <h4 class="card-title">Add Job</h4>
+                            <h4 class="card-title">A</h4>jouter une prestation
                             <div class="basic-form">
                                 <form id="addjobdata" method="post">
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Job Name</label>
+                                        <label class="col-sm-2 col-form-label">Nom de la prestation</label>
                                         <div class="col-sm-10">
                                             <!-- <input type="text" class="form-control" placeholder="Job Name" id="nomPrestation" name="nomPrestation"> -->
                                             <select id="service-list"  class="form-select form-select-sm" aria-label=".form-select-sm example" id="nomPrestation" name="nomPrestation" >
@@ -203,7 +203,7 @@ include "../config.php";
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Employee Email</label>
+                                        <label class="col-sm-2 col-form-label">Email de l'employé</label>
                                         <div class="col-sm-10">
                                            
                                             <select id="employee-list"  class="form-select form-select-sm" aria-label=".form-select-sm example" id="ref_employe" name="ref_employe" >
@@ -215,7 +215,7 @@ include "../config.php";
 
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Client Email</label>
+                                        <label class="col-sm-2 col-form-label">Email du client</label>
                                         <div class="col-sm-10">
                                             
                                             <select id="client-list" class="form-select form-select-sm" aria-label=".form-select-sm example" id="ref_client" name="ref_client">
@@ -225,36 +225,36 @@ include "../config.php";
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Employee Feedback</label>
+                                        <label class="col-sm-2 col-form-label">Feedback de l'employé</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" placeholder="Employee Feedback" name="commentaire" id="commentaire">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Client Feedback</label>
+                                        <label class="col-sm-2 col-form-label">Feedback du client</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" placeholder="Client Feedback" name="remarque_client" id="remarque_client">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Start Time :</label>
+                                        <label class="col-sm-2 col-form-label">Heure de débur :</label>
                                         <div class="col-sm-10">
                                             <input type="datetime-local" class="form-control" name="heureArrivee" id="heureArrivee">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">End Time :</label>
+                                        <label class="col-sm-2 col-form-label">Heure de fin :</label>
                                         <div class="col-sm-10">
                                             <input type="datetime-local" class="form-control" name="heureDepart" id="heureDepart">
                                         </div>
                                     </div>
 
                                     <div class=" d-flex justify-content-between">
-                                        <button type="submit" class="btn btn-dark">ADD</button>
+                                        <button type="submit" class="btn btn-dark">AJOUTER</button>
 
-                                        <a href="./viewJob.php"><button type="button" class="btn btn-info">VIEW JOBS</button></a>
+                                        <a href="./viewJob.php"><button type="button" class="btn btn-info">VOIRS LES PRESTATIONS</button></a>
                                         
                                     </div>
                                     <div id="timeoutmsg"></div>

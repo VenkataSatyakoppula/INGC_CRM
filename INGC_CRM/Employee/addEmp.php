@@ -95,7 +95,7 @@ include "../config.php";
                                 <div class="drop-down dropdown-profile animated fadeIn dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(5px, 57px, 0px);">
                                     <div class="dropdown-content-body">
                                         <ul>
-                                            <li><span>connecté en tant que <?php echo $_SESSION["user"]; ?> </span></li>
+                                            <li><span>Connecté en tant que <?php echo $_SESSION["user"]; ?> </span></li>
                                             <li><a href="../logout.php"><i class="icon-key"></i> <span>Se déconnecter</span></a></li>
                                         </ul>
                                     </div>
@@ -129,7 +129,7 @@ include "../config.php";
 
                         <li class="">
                             <a class="has-arrow" href="../Jobs/viewJob.php" aria-expanded="false">
-                                <i class="fa fa-tasks"></i><span class="nav-text">Prestations</span>
+                                <i class="fa fa-tasks"></i><span class="nav-text">Prestation</span>
                             </a>
                           
                         </li>
@@ -141,21 +141,21 @@ include "../config.php";
 
                         <li class="">
                             <a class="has-arrow" href="../Client/viewClient.php" aria-expanded="false">
-                                <i class="fa fa-user"></i><span class="nav-text">Clients</span>
+                                <i class="fa fa-user"></i><span class="nav-text">Client</span>
                             </a>
                           
                         </li>
 
                         <li class="">
                             <a class="has-arrow" href="../Employee/viewEmp.php" aria-expanded="false">
-                                <i class="fa fa-users"></i><span class="nav-text">Employés</span>
+                                <i class="fa fa-users"></i><span class="nav-text">Employé</span>
                             </a>
                           
                         </li>
                         <?php  if ($_SESSION['role']==4 ){?>
                         <li class="">
                             <a class="has-arrow" href="../Managers/viewManagers.php" aria-expanded="false">
-                                <i class="fa fa-users"></i><span class="nav-text">Managers</span>
+                                <i class="fa fa-users"></i><span class="nav-text">Manager</span>
                             </a>
                         </li>
                          <?php }?>  
@@ -180,7 +180,7 @@ include "../config.php";
                 <div class="w-75 col-lg-12 mx-auto mt-5">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Ajouter Employés</h4>
+                            <h4 class="card-title">Ajouter un employé</h4>
                             <div class="basic-form">
                                 <form id="addemployeedata" method="post">
 
@@ -238,7 +238,7 @@ include "../config.php";
                                     <div class=" d-flex justify-content-between">
                                         <button type="submit" class="btn btn-dark">AJOUTER</button>
 
-                                        <a href="./viewEmp.php"><button type="button" class="btn btn-info">VOIR EMPLOYES</button></a> 
+                                        <a href="./viewEmp.php"><button type="button" class="btn btn-info">VOIR LES EMPLOYES</button></a> 
                                     </div>
 
                                     <div id="timeoutmsg"></div>

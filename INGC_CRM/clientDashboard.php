@@ -295,7 +295,7 @@
                         <div class="icon-box">
                             <i class="material-icons">&#xE5CD;</i>
                         </div>
-                        <h4 class="modal-title">Validate Work</h4>
+                        <h4 class="modal-title">Validation</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
@@ -314,7 +314,7 @@
                         
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Annuler</button>
                         <input type="submit" class="btn btn-success" value="VALIDATE" data-id="" id="btnValidateYes"></input>
                     </div>
                     </form>
@@ -326,7 +326,7 @@
             <div class="modal-dialog modal-confirm">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Dispute Work (Cannot Edit again)</h4>
+                        <h4 class="modal-title">Contester (Ne peut pas être modifié)</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
@@ -345,7 +345,7 @@
                         
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Annuler</button>
                         <input type="submit" class="btn btn-danger" value="RESTART WORK" data-id="" id="btnDisputeYes"></input>
 
                     </div>
@@ -357,12 +357,12 @@
         <div class="content-body" style="min-height: 876px;">
 
             <div class="container-fluid mt-3">
-                <h1>Hello Client,&nbsp <?php echo $_SESSION['name']; ?>!</h1>
+                <h1>Bonjour Client,&nbsp <?php echo $_SESSION['name']; ?>!</h1>
                 <div class="row">
                     <div class="col-lg-12">
 
                         <h2>Prestation en cours</h2>
-                        <span class="text-primary"><strong>Tip: Please refresh The page to check The latest Status!!
+                        <span class="text-primary"><strong>Conseil : veuillez actualiser la page pour vérifier le dernier statut !
                         </strong></span>
                         <div class="card">
                             <div class="card-body">
@@ -379,9 +379,9 @@
                                                     <th>HEURE DE DEBUT</th>
                                                     <th>HEURE DE FIN</th>
                                                     <th>STATUS DE LA PRESTATION</th>
-                                                    <th>EMPLOYEE FEEDBACK</th>
-                                                    <th>YOUR FEEDBACK</th>
-                                                    <th>VALIDATE</th>
+                                                    <th>FEEDBACK EMPLOYE</th>
+                                                    <th>VOTRE FEEDBACK</th>
+                                                    <th>VALIDATION</th>
                                                 </tr>
                                             </thead>
 

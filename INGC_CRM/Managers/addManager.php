@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter Manager</title>
+    <title>Ajouter un Manager</title>
     <!-- Pignose Calender -->
     <link href="../plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
     <!-- Chartist -->
@@ -95,7 +95,7 @@
                                 <div class="drop-down dropdown-profile animated fadeIn dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(5px, 57px, 0px);">
                                     <div class="dropdown-content-body">
                                         <ul>
-                                            <li><span>connecté en tant que <?php echo $_SESSION["user"]; ?> </span></li>
+                                            <li><span>Connecté en tant que <?php echo $_SESSION["user"]; ?> </span></li>
                                             <li><a href="../logout.php"><i class="icon-key"></i> <span>Se déconnecter</span></a></li>
                                         </ul>
                                     </div>
@@ -143,21 +143,21 @@
 
                         <li class="">
                             <a class="has-arrow" href="../Client/viewClient.php" aria-expanded="false">
-                                <i class="fa fa-user"></i><span class="nav-text">Clients</span>
+                                <i class="fa fa-user"></i><span class="nav-text">Client</span>
                             </a>
 
                         </li>
 
                         <li class="">
                             <a class="has-arrow" href="../Employee/viewEmp.php" aria-expanded="false">
-                                <i class="fa fa-users"></i><span class="nav-text">Employés</span>
+                                <i class="fa fa-users"></i><span class="nav-text">Employé</span>
                             </a>
 
                         </li>
                         <?php  if ($_SESSION['role']==4 ){?>
                         <li class="">
                             <a class="has-arrow" href="../Managers/viewManagers.php" aria-expanded="false">
-                                <i class="fa fa-users"></i><span class="nav-text">Managers</span>
+                                <i class="fa fa-users"></i><span class="nav-text">Manager</span>
                             </a>
                         </li>
                          <?php }?>  
@@ -182,12 +182,12 @@
                 <div class="w-75 col-lg-12 mx-auto mt-5">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Ajouter Manager</h4>
+                            <h4 class="card-title">Ajouter un Manager</h4>
                             <span id="errorinfo"></span>
                             <div class="basic-form" >
                                 <form id="addclientdata" method="post">
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Name</label>
+                                        <label class="col-sm-2 col-form-label">Nom</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" placeholder="First Name" name="fname" id="fname">
                                         </div>
@@ -220,9 +220,9 @@
 
                                     <div class=" d-flex justify-content-between">
 
-                                        <button type="submit" class="btn btn-dark" id="add-data">ADD </button>
+                                        <button type="submit" class="btn btn-dark" id="add-data">AJOUTER </button>
 
-                                        <a href="./viewManagers.php"><button type="button" class="btn btn-info">VOIR MANAGERS</button></a>
+                                        <a href="./viewManagers.php"><button type="button" class="btn btn-info">VOIR LES MANAGERS</button></a>
 
                                     </div>
 

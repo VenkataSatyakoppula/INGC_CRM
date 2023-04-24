@@ -13,7 +13,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Manager Dashboard</title>
+    <title>Tabelau de bord Managers</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Pignose Calender -->
@@ -175,7 +175,7 @@
                         <li class="icons dropdown"><a href="add.php" data-toggle="dropdown">
                             </a>
                             <div class="addservice"><a href="add.php" data-toggle="dropdown">
-                                </a><a href="add.php">Add Services</a>
+                                </a><a href="add.php">Ajouter une prestation</a>
 
                             </div>
 
@@ -245,8 +245,8 @@
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(5px, 57px, 0px);">
                                 <div class="dropdown-content-body">
                                     <ul>
-                                        <li><span>Logged in as <?php echo $_SESSION["user"]; ?> </span></li>
-                                        <li><a href="logout.php"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                        <li><span>Connecter en tant que <?php echo $_SESSION["user"]; ?> </span></li>
+                                        <li><a href="logout.php"><i class="icon-key"></i> <span>Déconnexion</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -266,13 +266,13 @@
             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
                 <div class="nk-nav-scroll active" style="overflow: hidden; width: auto; height: 100%;">
                     <ul class="metismenu in" id="menu">
-                        <li class="nav-label">Dashboard</li>
+                        <li class="nav-label">Tableau de bord</li>
                         <li class="">
                             <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+                                <i class="icon-speedometer menu-icon"></i><span class="nav-text">Tableau de bord</span>
                             </a>
                             <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                                <li class="active"><a href="index.php" class="active">Home 1</a></li>
+                                <li class="active"><a href="index.php" class="active">Acceuil 1</a></li>
                                 <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                             </ul>
                         </li>
@@ -280,7 +280,7 @@
 
                         <li class="">
                             <a class="has-arrow" href="./Jobs/viewJob.php" aria-expanded="false">
-                                <i class="fa fa-tasks"></i><span class="nav-text">Jobs</span>
+                                <i class="fa fa-tasks"></i><span class="nav-text">Prestations</span>
                             </a>
                             <!-- <ul aria-expanded="false" class="collapse" style="height: 0px;"> -->
                                 <!-- <li class="active"><a href="./Service/addService.php" class="active">Add Jobs </a></li> -->
@@ -290,7 +290,7 @@
                         </li>
                         <li class="">
                             <a class="has-arrow" href="./Jobs/jobhistory.php" aria-expanded="false">
-                                <i class="fa fa-history"></i><span class="nav-text">Job History</span>
+                                <i class="fa fa-history"></i><span class="nav-text">Historique des prestations</span>
                             </a>
                         </li>
 
@@ -306,7 +306,7 @@
 
                         <li class="">
                             <a class="has-arrow" href="./Employee/viewEmp.php" aria-expanded="false">
-                                <i class="fa fa-users"></i><span class="nav-text">Employee</span>
+                                <i class="fa fa-users"></i><span class="nav-text">Employé</span>
                             </a>
                             <!-- <ul aria-expanded="false" class="collapse" style="height: 0px;"> -->
                                 <!-- <li class="active"><a href="./Employee/addEmp.php" class="active">Add Employee </a></li>       -->
@@ -409,8 +409,8 @@
         <div class="content-body" style="min-height: 876px;">
 
             <div class="container-fluid mt-3">
-                <h1>Hello,  <?php echo $_SESSION['name']; ?>!</h1>
-                <h2>List of All Services!</h2>
+                <h1>Bonjour,  <?php echo $_SESSION['name']; ?>!</h1>
+                <h2>Liste de toutes les prestations!</h2>
 
                 <div class="row">
                     <div class="col-lg-12">
@@ -423,12 +423,12 @@
                                         <table class="table table-xs mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th>CREATOR </th>
-                                                    <th>SERVICE</th>
-                                                    <th>START TIME</th>
-                                                    <th>END TIME</th>
-                                                    <th>MODIFY</th>
-                                                    <th>DELETE</th>
+                                                    <th>CREE PAR</th>
+                                                    <th>PRESTATION</th>
+                                                    <th>HEURE DEBUT</th>
+                                                    <th>HEURE FIN</th>
+                                                    <th>MODIFIER</th>
+                                                    <th>SUPPRIMER</th>
                                                 </tr>
                                             </thead>
 
@@ -458,17 +458,17 @@
                                                         <!-- <td class="td"><button class="updatebutton" id="udpatebutton">UPDATE</button></td> -->
                                                         <?php if($get_data[$i]->empid == $_SESSION["id"]) {?>
                                                         <td>
-                                                            <div class="viewlinkupdate"><a class="updatelink" href="update.php?empid=<?php echo $_SESSION['id'] ?>&id=<?php echo $get_data[$i]->ID ?>&servicename=<?php echo $get_data[$i]->SERVICE_NAME ?>&starttime=<?php echo $get_data[$i]->START_TIME ?>&endtime=<?php echo $get_data[$i]->END_TIME; ?>">UPDATE</a></div>
+                                                            <div class="viewlinkupdate"><a class="updatelink" href="update.php?empid=<?php echo $_SESSION['id'] ?>&id=<?php echo $get_data[$i]->ID ?>&servicename=<?php echo $get_data[$i]->SERVICE_NAME ?>&starttime=<?php echo $get_data[$i]->START_TIME ?>&endtime=<?php echo $get_data[$i]->END_TIME; ?>">MODIFIER</a></div>
                                                         </td>
                                                         <td>
-                                                            <div class="viewlinkdelete"><a href="delete.php?eid=<?php echo  $_SESSION['id'] ?>&id=<?php echo $get_data[$i]->ID; ?>">DELETE</a></div>
+                                                            <div class="viewlinkdelete"><a href="delete.php?eid=<?php echo  $_SESSION['id'] ?>&id=<?php echo $get_data[$i]->ID; ?>">SUPPRIMER</a></div>
                                                         </td>
                                                         <?php }else{?>
                                                             <td>
-                                                            <strong>Update Not Allowed!</strong>
+                                                            <strong> Modification pas autorisée !</strong>
                                                         </td>
                                                         <td>
-                                                        <strong> Delete Not Allowed!</strong>
+                                                        <strong> Suppression pas autorisée!</strong>
                                                         </td>
                                                             <?php }?>
                                                     </tr>

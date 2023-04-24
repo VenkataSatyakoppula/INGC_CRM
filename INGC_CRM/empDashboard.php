@@ -13,7 +13,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Employee Dashboard</title>
+    <title>Tableau de bord employé</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Pignose Calender -->
@@ -280,7 +280,7 @@
             <div class="modal-dialog modal-confirm">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Employee FeedBack</h4>
+                        <h4 class="modal-title">FeedBack Employé</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
@@ -291,7 +291,7 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label my-1">Commentaire</label>
                                         <div class="col-sm-10">
-                                            <textarea name="commentaire" id="commentaire" cols="55" rows="10">No feedback.</textarea>
+                                            <textarea name="commentaire" id="commentaire" cols="55" rows="10">Pas de feedback.</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -299,7 +299,7 @@
                         
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Annuler</button>
                         <input type="submit" class="btn btn-danger" value="CHECKOUT" data-id="" id="btncheckoutYes"></input>
                     </div>
                     </form>
@@ -310,12 +310,12 @@
         <div class="content-body" style="min-height: 876px;">
 
             <div class="container-fluid mt-3">
-                <h1>Welcome Employee, <?php echo $_SESSION["name"] ?> !</h1>
+                <h1>Bonjour Employee, <?php echo $_SESSION["name"] ?> !</h1>
                 <div class="row">
                     <div class="col-lg-12">
 
-                        <h2>Active Jobs | Dashboard</h2>
-                        <span class="text-primary"><strong>Tip: Please refresh The page Before Check-in and Check out!!</strong></span>
+                        <h2>Prestations en cours | Tableau de bord</h2>
+                        <span class="text-primary"><strong>Conseil : veuillez actualiser la page avant l'enregistrement l'arrivée et le départ !</strong></span>
                         <div class="card">
                             <div class="card-body">
                                 <div class="active-member">
@@ -326,14 +326,14 @@
                                             <thead>
                                                 <tr>
                                                     <th>S.NO.</th>
-                                                    <th>JOB NAME</th>
-                                                    <th>CLIENT NAME</th>
-                                                    <th>START TIME</th>
-                                                    <th>END TIME</th>
-                                                    <th>CLIENT FEEDBACK</th>
-                                                    <th>STATUS OF THE WORK</th>
+                                                    <th>PRESTATION</th>
+                                                    <th>CLIENT</th>
+                                                    <th>HEURE DU DEBUT</th>
+                                                    <th>HEURE DE FIN</th>
+                                                    <th>FEEDBACK CLIENT</th>
+                                                    <th>STATUT</th>
 
-                                                    <th>LAST CHECK IN</th>
+                                                    <th>DERNIERE CONNEXION</th>
                                                     <th>ACTION</th>
                                                 </tr>
                                             </thead>

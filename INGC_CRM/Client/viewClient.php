@@ -3,13 +3,13 @@ include "../config.php";
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Details</title>
+    <title>Client</title>
     <!-- Pignose Calender -->
     <link href="../plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
     <!-- Chartist -->
@@ -98,7 +98,7 @@ include "../config.php";
                                     <div class="dropdown-content-body">
                                         <ul>
                                            <li><span>Se connecter en tant que <?php echo $_SESSION["user"]; ?> </span></li>
-                                            <li><a href="../logout.php"><i class="icon-key"></i> <span>Se déconnecter</span></a></li>
+                                            <li><a href="../logout.php"><i class="icon-key"></i> <span>Déconnexion</span></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -135,7 +135,7 @@ include "../config.php";
 
                         <li class="">
                             <a class="has-arrow" href="../Jobs/viewJob.php" aria-expanded="false">
-                                <i class="fa fa-tasks"></i><span class="nav-text">Prestations</span>
+                                <i class="fa fa-tasks"></i><span class="nav-text">Prestation</span>
                             </a>
                          
                         </li>
@@ -147,14 +147,14 @@ include "../config.php";
 
                         <li class="">
                             <a class="has-arrow" href="../Client/viewClient.php" aria-expanded="false">
-                                <i class="fa fa-user"></i><span class="nav-text">Clients</span>
+                                <i class="fa fa-user"></i><span class="nav-text">Client</span>
                             </a>
                            
                         </li>
 
                         <li class="">
                             <a class="has-arrow" href="../Employee/viewEmp.php" aria-expanded="false">
-                                <i class="fa fa-users"></i><span class="nav-text">Employés</span>
+                                <i class="fa fa-users"></i><span class="nav-text">Employé</span>
                             </a>
                             
                         </li>
@@ -162,7 +162,7 @@ include "../config.php";
                         <?php  if ($_SESSION['role']==4 ){?>
                         <li class="">
                             <a class="has-arrow" href="../Managers/viewManagers.php" aria-expanded="false">
-                                <i class="fa fa-users"></i><span class="nav-text">Managers</span>
+                                <i class="fa fa-users"></i><span class="nav-text">Manager</span>
                             </a>
                         </li>
                          <?php }?>   
@@ -181,7 +181,7 @@ include "../config.php";
 
 
 
-        <h1 class="job-heading">VOIR CLIENTS</h1>
+        <h1 class="job-heading">VOIR LES CLIENTS</h1>
 
         <div class="content-body" style="min-height: 876px;">
 
@@ -198,8 +198,8 @@ include "../config.php";
                                         <table class="table table-xs mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th> PRENOM</th>
-                                                    <th> NOM DE FAMILLE</th>
+                                                    <th>PRENOM</th>
+                                                    <th>NOM DE FAMILLE</th>
                                                     <th>TELEPHONE</th>
                                                     <th>AGE</th>
                                                     <th>ADRESSE</th>
@@ -223,7 +223,7 @@ include "../config.php";
                                         </table>
 
                                         <a href="./addClient.php">
-                                            <button type="button" class="btn btn-primary">AJOUTER CLIENT</button>
+                                            <button type="button" class="btn btn-primary">AJOUTER LE CLIENT</button>
                                         </a>
                                     </div>
 
@@ -263,7 +263,7 @@ include "../config.php";
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">NOM DE FAMILLE</label>
+                                        <label class="col-sm-2 col-form-label">Nom de famille</label>
                                         <div class="col-sm-10">
                                         <input type="text" placeholder="Last Name" class="form-control" name="nomClient" required>
                                         </div>
@@ -294,7 +294,7 @@ include "../config.php";
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">code PIN</label>
+                                        <label class="col-sm-2 col-form-label">Code Postal</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" placeholder="cpEmployee" name="cpClient" required>
                                         </div>

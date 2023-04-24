@@ -128,7 +128,7 @@ include "../config.php";
 
                         <li class="">
                             <a class="has-arrow" href="../Jobs/viewJob.php" aria-expanded="false">
-                                <i class="fa fa-tasks"></i><span class="nav-text">Prestations</span>
+                                <i class="fa fa-tasks"></i><span class="nav-text">Prestation</span>
                             </a>
 
                         </li>
@@ -141,21 +141,21 @@ include "../config.php";
 
                         <li class="">
                             <a class="has-arrow" href="../Client/viewClient.php" aria-expanded="false">
-                                <i class="fa fa-user"></i><span class="nav-text">Clients</span>
+                                <i class="fa fa-user"></i><span class="nav-text">Client</span>
                             </a>
 
                         </li>
 
                         <li class="">
                             <a class="has-arrow" href="../Employee/viewEmp.php" aria-expanded="false">
-                                <i class="fa fa-users"></i><span class="nav-text">Employés</span>
+                                <i class="fa fa-users"></i><span class="nav-text">Employé</span>
                             </a>
 
                         </li>
                         <?php  if ($_SESSION['role']==4 ){?>
                         <li class="">
                             <a class="has-arrow" href="../Managers/viewManagers.php" aria-expanded="false">
-                                <i class="fa fa-users"></i><span class="nav-text">Managers</span>
+                                <i class="fa fa-users"></i><span class="nav-text">Manager</span>
                             </a>
                         </li>
                          <?php }?>  
@@ -222,7 +222,7 @@ include "../config.php";
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Code PIN</label>
+                                        <label class="col-sm-2 col-form-label">Code Postal</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" placeholder="cpEmployee" name="cpEmployee">
                                         </div>

@@ -13,7 +13,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Work History</title>
+    <title>Historique des prestations</title>
     <!-- Pignose Calender -->
     <link href="../plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
     <!-- Chartist -->
@@ -93,8 +93,8 @@
                                 <div class="drop-down dropdown-profile animated fadeIn dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(5px, 57px, 0px);">
                                     <div class="dropdown-content-body">
                                         <ul>
-                                            <li><span>connecté en tant que<?php echo $_SESSION["user"]; ?> </span></li>
-                                            <li><a href="../logout.php"><i class="icon-key"></i> <span>Se déconnecter</span></a></li>
+                                            <li><span>Connecté en tant que<?php echo $_SESSION["user"]; ?> </span></li>
+                                            <li><a href="../logout.php"><i class="icon-key"></i> <span>Deconnexion</span></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -179,11 +179,11 @@
                                             <thead>
                                                 <tr>
                                                     <th>S.NO.</th>
-                                                    <th>JOB NAME</th>
-                                                    <th>ASSIGNED EMPLOYEE</th>
-                                                    <th>START DATE AND TIME</th>
-                                                    <th>END DATE AND TIME</th>
-                                                    <th>STATUS OF THE WORK</th>
+                                                    <th>NOM DE LA PRESTATION</th>
+                                                    <th>EMPLOYE ASSIGNER</th>
+                                                    <th>DATE ET HEURE DU DEBUT</th>
+                                                    <th>DATE ET HEURE DE LA FIN</th>
+                                                    <th>STATUT DE LA PRESTATION</th>
 
                                                 </tr>
                                             </thead>

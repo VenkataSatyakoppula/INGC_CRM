@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Add a Service</title>
+    <title>Ajouter une prestation</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Pignose Calender -->
@@ -90,8 +90,8 @@
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(5px, 57px, 0px);">
                                 <div class="dropdown-content-body">
                                     <ul>     
-                                        <li><span>Logged in as <?php echo $_SESSION["user"]; ?> </span></li>
-                                        <li><a href="logout.php"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                        <li><span>Connecter en tant que <?php echo $_SESSION["user"]; ?> </span></li>
+                                        <li><a href="logout.php"><i class="icon-key"></i> <span>Déconnection</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -110,21 +110,21 @@
         <div class="nk-sidebar">           
             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;"><div class="nk-nav-scroll active" style="overflow: hidden; width: auto; height: 100%;">
                 <ul class="metismenu in" id="menu">
-                    <li class="nav-label">Dashboard</li>
+                    <li class="nav-label">Tableau de bord</li>
                     <li class="">
 
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Tableau de bord</span>
                         </a>
                         <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                            <li class="active"><a href="<?php echo $redir; ?>" class="active">Home</a></li>
+                            <li class="active"><a href="<?php echo $redir; ?>" class="active">Acceuil</a></li>
                             <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                         </ul>
                     </li>
 
                     <li class="">
                             <a class="has-arrow" href="./Jobs/viewJob.php" aria-expanded="false">
-                                <i class="fa fa-tasks"></i><span class="nav-text">Jobs</span>
+                                <i class="fa fa-tasks"></i><span class="nav-text">Prestation</span>
                             </a>
                             
                         </li>
@@ -138,7 +138,7 @@
 
                         <li class="">
                             <a class="has-arrow" href="./Employee/viewEmp.php" aria-expanded="false">
-                                <i class="fa fa-users"></i><span class="nav-text">Employee</span>
+                                <i class="fa fa-users"></i><span class="nav-text">Employé</span>
                             </a>
                            
                         </li>
@@ -168,25 +168,25 @@
      <div class="w-75 col-lg-12 mx-auto mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Add Service</h4>
+                                <h4 class="card-title">Ajouter une prestation</h4>
                                 <div class="basic-form">
                                     <form action="post.php" method="post">
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Service Name</label>
+                                            <label class="col-sm-2 col-form-label">Nom de la prestation</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" placeholder="Service Name" name="servicename" required>
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Start Time :</label>
+                                            <label class="col-sm-2 col-form-label">Heure du début :</label>
                                             <div class="col-sm-10">
                                                 <input type="datetime-local" class="form-control" name="starttime" required>
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">End Time :</label>
+                                            <label class="col-sm-2 col-form-label">Heure de fin :</label>
                                             <div class="col-sm-10">
                                                 <input type="datetime-local" class="form-control" name="endtime" required>
                                             </div>
@@ -199,7 +199,7 @@
                                         
                                         
                                             <div class="col-sm-10">
-                                                <button type="submit" class="btn btn-dark">ADD</button>
+                                                <button type="submit" class="btn btn-dark">AJOUTER</button>
                                             </div>
                                         </form></div>
                                     

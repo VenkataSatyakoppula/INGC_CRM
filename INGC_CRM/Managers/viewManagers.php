@@ -144,7 +144,7 @@ include "../config.php";
 
                         <li class="">
                             <a class="has-arrow" href="../Jobs/viewJob.php" aria-expanded="false">
-                                <i class="fa fa-tasks"></i><span class="nav-text">Prestations</span>
+                                <i class="fa fa-tasks"></i><span class="nav-text">Prestation</span>
                             </a>
                          
                         </li>
@@ -156,21 +156,21 @@ include "../config.php";
 
                         <li class="">
                             <a class="has-arrow" href="../Client/viewClient.php" aria-expanded="false">
-                                <i class="fa fa-user"></i><span class="nav-text">Clients</span>
+                                <i class="fa fa-user"></i><span class="nav-text">Client</span>
                             </a>
                            
                         </li>
 
                         <li class="">
                             <a class="has-arrow" href="../Employee/viewEmp.php" aria-expanded="false">
-                                <i class="fa fa-users"></i><span class="nav-text">Employés</span>
+                                <i class="fa fa-users"></i><span class="nav-text">Employé</span>
                             </a>
                             
                         </li>
                         <?php  if ($_SESSION['role']==4 ){?>
                         <li class="">
                             <a class="has-arrow" href="viewManagers.php" aria-expanded="false">
-                                <i class="fa fa-users"></i><span class="nav-text">Managers</span>
+                                <i class="fa fa-users"></i><span class="nav-text">Manager</span>
                             </a>
                         </li>
                          <?php }?>  
@@ -189,7 +189,7 @@ include "../config.php";
 
 
 
-        <h1 class="job-heading">VOIR MANAGERS</h1>
+        <h1 class="job-heading">VOIR LES MANAGERS</h1>
 
         <div class="content-body" style="min-height: 876px;">
 
@@ -225,7 +225,7 @@ include "../config.php";
                                         </table>
 
                                         <a href="./addManager.php">
-                                            <button type="button" class="btn btn-primary">AJOUTER MANAGER</button>
+                                            <button type="button" class="btn btn-primary">AJOUTER UN MANAGER</button>
                                         </a>
                                     </div>
 
