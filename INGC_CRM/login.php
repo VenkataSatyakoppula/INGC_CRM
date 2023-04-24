@@ -16,7 +16,7 @@
 
 
 <div class="w-50 col-lg-12 mx-auto mt-5">
-    <h2 class="text-center text-primary">Login Portal</h2>
+    <h2 class="text-center text-primary">Portail de connexion</h2>
                         <div class="card">
                             <div class="card-body">
                                 <!-- <div class="d-flex justify-content-between"> -->
@@ -56,7 +56,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Password</label>
+                                            <label class="col-sm-2 col-form-label">Mot de passe</label>
                                             <div class="col-sm-10">
                                                 <input name="password" id="password" type="password" class="form-control" placeholder="Password">
                                             </div>
@@ -65,7 +65,7 @@
                                         
                                         <div class="form-group row">
                                             <div class="col-sm-10">
-                                                <button type="submit" class="btn btn-primary">LOGIN</button>
+                                                <button type="submit" class="btn btn-primary">CONNEXION</button>
                                             </div class="col-sm-10">
                                         </div>
                                     </form>
